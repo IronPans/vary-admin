@@ -1,2 +1,16 @@
 # vary-admin
-快速构建项目：vue+vue-router+less+webpack 4+es6
+
+**技术栈**
+
+- vue
+- vue-router
+- Less
+- webpack 4
+- ES6
+
+**启动项目**
+
+```
+npm start
+```
+

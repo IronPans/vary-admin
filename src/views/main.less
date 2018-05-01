@@ -1,0 +1,59 @@
+@import "../styles/mixin.less";
+
+.v-containers {
+  position: relative;
+  height: 100%;
+
+  .v-aside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    z-index: 99;
+    background: #07111b;
+    box-shadow: 3px 0 3px rgba(0,0,0,.1);
+
+    .v-aside-header {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+
+  .v-content {
+    padding-left: 250px;
+    max-height: 100%;
+
+    .v-content-wrapper {
+      position: absolute;
+      top: 60px;
+      left: 260px;
+      bottom: 0;
+      right: 0;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow: hidden;
+      overflow-y: auto;
+
+      .custom-scroll
+    }
+  }
+
+  .v-nav {
+    width: 100%;
+    height: 60px;
+    background: #fff;
+    box-shadow: 0 3px 3px rgba(0,0,0,.1);
+
+    .v-nav-menu {
+      padding: 8px;
+      margin: 10px 15px;
+      box-shadow: none;
+    }
+  }
+}
