@@ -64,11 +64,14 @@ module.exports = (env) => {
                 verbose: true
             }),
             new HtmlWebpackPlugin({
-                title: 'Vary Admin',
+                title: 'vary-admin',
+                template: './src/index.html',
+                chunksSortMode: function (a, b) {
+                    const entryPoints = ['vendor', 'app'];
+                    return entryPoints.indexOf(a.names[0]) - entryPoints.indexOf(b.names[0]);
+                },
                 stat: isProduction,
                 inject: 'body',
-                template: './src/index.html',
-                hash: true,
                 minify: isProduction ? {
                     removeComments: true,
                     collapseWhitespace: true,
