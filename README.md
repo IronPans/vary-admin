@@ -14,3 +14,10 @@
 npm start
 ```
 
+
+**终极目标**
+
+展示图：
+![](http://p7z185mbi.bkt.clouddn.com/vary_admin.png)
+
+
