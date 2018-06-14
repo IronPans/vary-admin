@@ -1,0 +1,60 @@
+@import "../variables";
+
+.va-message.va-toast-group {
+  position: fixed;
+  z-index: 10010;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .va-message-mask {
+    background: transparent;
+  }
+
+  .va-message-item {
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+
+    .va-message-item-inner {
+      position: relative;
+      display: inline-flex;
+      align-content: center;
+      line-height: 1.5;
+
+      .va-toast-avatar {
+        display: flex;
+        align-content: center;
+        font-size: 20px;
+        padding-right: 10px;
+      }
+
+      .va-toast-content {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+.va-toast {
+  position: relative;
+  background: #fff;
+  padding: 10px 16px;
+  border-radius: 4px;
+  max-width: 300px;
+  font-size: 14px;
+  overflow: hidden;
+  color: #333;
+
+  .va-toast-item {
+    display: flex;
+    align-items: center;
+
+    > .va-icon {
+      margin-right: 5px;
+    }
+  }
+}

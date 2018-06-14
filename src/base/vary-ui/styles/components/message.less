@@ -1,0 +1,34 @@
+.va-message {
+  box-sizing: border-box;
+  line-height: 1.5;
+  list-style: none;
+  color: rgba(0, 0, 0, 0.65);
+
+  &.va-message-none {
+    pointer-events: none;
+  }
+
+  .va-message-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+  }
+
+  .va-message-item-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 15px;
+    opacity: .7;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

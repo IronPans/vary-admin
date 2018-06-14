@@ -1,0 +1,45 @@
+.va-form {
+  .va-form-item {
+    position: relative;
+    margin-bottom: 24px;
+
+    .va-form-item-wrapper {
+      position: relative;
+    }
+
+    > label {
+      padding: 0 0 10px 0;
+    }
+
+    &.va-form-item-error {
+
+      .va-form-item-error-msg {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        line-height: 1;
+        padding-top: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        color: #f4516c;
+      }
+
+      .va-input {
+        .va-input-inner {
+          border-color: #f4516c;
+        }
+      }
+    }
+  }
+
+  &.va-form-inline {
+    .va-form-item {
+      display: flex;
+      align-items: center;
+
+      > label {
+        padding: 0 10px 0 0;
+      }
+    }
+  }
+}

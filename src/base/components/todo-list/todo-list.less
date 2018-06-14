@@ -1,0 +1,32 @@
+.va-todo-list {
+  > ul {
+    margin: 0;
+    padding: 0;
+
+    > li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      list-style: none;
+      border-bottom: 1px solid #f3f3f3;
+
+      &.completed {
+        .va-checkbox {
+          text-decoration: line-through;
+          text-decoration-color: #007bff;
+        }
+      }
+
+      .remove {
+        font-size: 12px;
+        color: #ff7474;
+        padding: 3px;
+        text-align: center;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 1px solid currentColor;
+      }
+    }
+  }
+}

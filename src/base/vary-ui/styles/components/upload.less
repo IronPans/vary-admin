@@ -1,0 +1,134 @@
+.va-upload-box {
+  .va-upload {
+    position: relative;
+    display: inline-flex;
+
+    &.va-upload-active {
+      border: 1px solid #1976d2;
+    }
+
+    &:active {
+      background: #eee;
+    }
+
+    .va-upload-toolbar {
+      display: inline-flex;
+
+      > .va-upload-advanced button {
+        margin-right: 10px;
+      }
+
+      button {
+        max-width: 150px;
+        justify-content: flex-start;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .va-upload-text {
+      position: relative;
+      margin-right: 10px;
+    }
+
+    .va-upload-btn {
+      text-align: center;
+      font-size: 13px;
+      width: 100px;
+      height: 34px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      padding: 0 15px;
+      margin-right: 10px;
+      color: #43494d;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+      i {
+        padding-right: 5px;
+      }
+    }
+
+    .va-upload-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+
+      input {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+      }
+    }
+  }
+  .va-upload-review {
+    .va-upload-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border: 1px solid #d9d9d9;
+      border-top: none;
+      transition: all .25s;
+
+      &:first-child {
+        border-top: 1px solid #d9d9d9;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+      }
+
+      img {
+        width: 40px;
+        height: 40px;
+        padding: 6px;
+        border-radius: 3px;
+        margin-right: 8px;
+      }
+
+      &:hover {
+        background: #eee;
+      }
+
+      .va-upload-delete {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        color: #f04134 !important;
+        margin-left: 8px;
+        border-radius: 50%;
+        transition: all .25s;
+
+        &:hover {
+          background: rgba(0, 0, 0, .2);
+        }
+      }
+    }
+  }
+  .va-upload-invalid {
+    padding: 10px;
+    color: red;
+    background: #eee;
+  }
+
+  .va-upload-progress,
+  .va-upload-review,
+  .va-upload-invalid {
+    margin-top: 10px;
+  }
+}

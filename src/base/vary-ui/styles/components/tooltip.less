@@ -1,0 +1,153 @@
+
+.va-tooltip {
+  position: relative;
+  display: inline-block;
+
+  .va-tooltip-inner {
+    display: inline-block;
+  }
+
+  .va-tooltip-tip {
+    position: absolute;
+    max-width: 250px;
+    min-height: 34px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    background: rgba(18, 19, 26, 0.5);
+    color: #fff;
+    border-radius: 3px;
+    white-space: nowrap;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: opacity .25s;
+    pointer-events: none;
+
+    &:before {
+      content: '';
+      position: absolute;
+    }
+  }
+
+  @bottom: va-tooltip-bottom;
+
+  &.@{bottom}-left,
+  &.@{bottom},
+  &.@{bottom}-right {
+
+    .va-tooltip-tip {
+      top: 100%;
+      margin-top: 10px;
+    }
+  }
+
+  &.@{bottom} {
+    .va-tooltip-tip {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &.@{bottom}-left {
+    .va-tooltip-tip {
+      left: 0;
+    }
+  }
+
+  &.@{bottom}-right {
+    .va-tooltip-tip {
+      right: 0;
+    }
+  }
+
+  @top: va-tooltip-top;
+
+  &.@{top}-left,
+  &.@{top},
+  &.@{top}-right {
+
+    .va-tooltip-tip {
+      top: -100%;
+      margin-top: -10px;
+    }
+  }
+
+  &.@{top} {
+    .va-tooltip-tip {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &.@{top}-left {
+    .va-tooltip-tip {
+      left: 0;
+    }
+  }
+
+  &.@{top}-right {
+    .va-tooltip-tip {
+      right: 0;
+    }
+  }
+
+  @left: va-tooltip-left;
+
+  &.@{left}-top,
+  &.@{left},
+  &.@{left}-bottom {
+
+    .va-tooltip-tip {
+      left: -100%;
+      margin-left: -10px;
+    }
+  }
+
+  &.@{left} {
+    .va-tooltip-tip {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &.@{left}-top {
+    .va-tooltip-tip {
+      top: 0;
+    }
+  }
+
+  &.@{left}-bottom {
+    .va-tooltip-tip {
+      bottom: 0;
+    }
+  }
+
+  @right: va-tooltip-right;
+
+  &.@{right}-top,
+  &.@{right},
+  &.@{right}-bottom {
+
+    .va-tooltip-tip {
+      left: 100%;
+      margin-left: 10px;
+    }
+  }
+
+  &.@{right} {
+    .va-tooltip-tip {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &.@{right}-top {
+    .va-tooltip-tip {
+      top: 0;
+    }
+  }
+
+  &.@{right}-bottom {
+    .va-tooltip-tip {
+      bottom: 0;
+    }
+  }
+}

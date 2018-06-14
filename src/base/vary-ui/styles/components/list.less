@@ -1,0 +1,123 @@
+@borderColor: rgba(204, 204, 204, 0.35);
+
+.va-list {
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid @borderColor;
+  border-bottom: 1px solid @borderColor;
+
+  &.va-list-reveal {
+    .va-list-item {
+      .va-avatar {
+        order: 5;
+        margin: 0 0 0 16px;
+      }
+    }
+  }
+}
+
+.va-list-item {
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  list-style: none;
+  background: #fff;
+  box-sizing: border-box;
+  transition: all .25s;
+
+  &:hover {
+    background: #f1f1f1;
+  }
+
+  &:first-child:last-child:after {
+    background: transparent;
+  }
+
+  &.va-list-item-reveal {
+    .va-avatar {
+      order: 5;
+      margin: 0 0 0 16px;
+    }
+  }
+
+  .va-list-item-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px 20px;
+    min-height: 36px;
+    transition: all .3s;
+    width: 100%;
+    box-sizing: border-box;
+
+    > a {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      box-sizing: border-box;
+    }
+
+    > .va-icon {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      margin-right: 16px;
+    }
+
+    .va-avatar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+      font-size: 25px;
+      user-select: none;
+      margin-right: 16px;
+    }
+  }
+
+  &:not(:first-child):last-child {
+    &:after {
+      display: none;
+    }
+  }
+
+  &:not(:last-child):after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 0;
+    height: 1px;
+    background: @borderColor;
+  }
+
+  .va-list-item-text {
+    flex: 1 0 auto;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    + .va-list-item-action {
+      .va-icon {
+        margin-right: 0;
+        color: rgba(0, 0, 0, 0.54);
+        vertical-align: middle;
+      }
+    }
+
+    > a {
+      box-sizing: border-box;
+    }
+  }
+
+  .va-list-item-action {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,6 @@
+.grid-order(@n: 1) when (12 >= @n) {
+  .col-order-@{n} {
+    order: @n;
+  }
+  .grid-order((@n + 1))
+}

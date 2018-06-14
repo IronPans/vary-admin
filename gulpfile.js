@@ -3,10 +3,21 @@ const cleanCSS = require('gulp-clean-css');
 const less = require('gulp-less');
 const rename = require('gulp-rename');
 const autoprefixer = require('gulp-autoprefixer');
+const del = require('del');
 
-// 编译less
-gulp.task('css', function () {
-    gulp.src('./src/styles/index.less')
+const config = {
+    themePath: './src/base/themes/',
+    to: './src/assets/themes'
+};
+
+const themes = [
+    './src/base/themes/*.less',
+    '!./src/base/themes/_*.less'
+];
+
+// 生成主题
+gulp.task('create:themes', function () {
+    gulp.src(themes)
         .pipe(less())
         .pipe(autoprefixer({
             browsers: [
@@ -19,8 +30,11 @@ gulp.task('css', function () {
             ]
         }))
         .pipe(cleanCSS())
-        .pipe(rename('vary-ui.css'))
-        .pipe(gulp.dest('./build/styles'));
+        .pipe(gulp.dest(config.to));
 });
 
-gulp.task('default', ['css']);
+gulp.task('clean', function (cb) {
+    del([config.to], cb);
+});
+
+gulp.task('default', ['clean', 'create:themes']);

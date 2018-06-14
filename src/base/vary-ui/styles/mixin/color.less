@@ -1,0 +1,33 @@
+@import "../variables";
+
+.color(@prefix, @attr: background, @i: 1) when (@i <= length(@colors)) {
+  @color: extract(@colors, @i);
+  @name: extract(@colorNames, @i);
+  &.@{prefix}-@{name} {
+    @{attr}: @color !important;
+  }
+
+  .color(@prefix, @attr, (@i + 1))
+}
+
+.theme(@prefix, @attr: background, @i: 1) when (@i <= length(@themes)) {
+  @color: extract(@themes, @i);
+  @name: extract(@themeNames, @i);
+  &.@{prefix}-@{name} {
+      @{attr}: @color !important;
+  }
+
+  .theme(@prefix, @attr, (@i + 1))
+}
+
+.flat-button(@prefix, @i: 1) when (@i <= length(@colors)) {
+  @color: extract(@colors, @i);
+  @name: extract(@colorNames, @i);
+  &.@{prefix}-@{name} {
+    color: @color !important;
+    background-color: transparent !important;
+    border-color: @color !important;
+  }
+
+  .flat-button(@prefix, (@i + 1))
+}

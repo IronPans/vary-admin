@@ -1,0 +1,96 @@
+@treeActiveColor: #007bff;
+.va-tree {
+
+  .va-tree-inner {
+    > .va-tree-node {
+      padding-left: 0 !important;
+    }
+  }
+
+  .va-tree-node-children,
+  .va-tree-inner {
+    padding: 0;
+  }
+}
+
+.va-tree-node {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  .va-tree-node-selectable {
+    cursor: pointer;
+  }
+
+  &.va-tree-node-leaf > .va-tree-node-content > .va-tree-node-toggle {
+    visibility: hidden;
+  }
+
+  .va-tree-node-checkbox-icon {
+    margin-right: 8px;
+    i {
+      display: block;
+    }
+  }
+
+  .va-tree-node-content,
+  .va-tree-node-label {
+    display: flex;
+    align-items: center;
+  }
+
+  .va-tree-node-label {
+    svg {
+      display: block;
+    }
+  }
+
+  .va-tree-node-content {
+    &.va-tree-node-content-selected {
+      .va-tree-node-menu-label {
+        color: @treeActiveColor;
+      }
+    }
+  }
+
+  .va-tree-node-menu-label {
+    margin-left: 15px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .va-tree-node-toggle {
+    vertical-align: middle;
+    color: inherit;
+    outline: none;
+    width: 24px;
+    height: 24px;
+    background: none;
+    margin: 0 8px;
+    border: none;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    &.va-tree-node-expanded {
+      span {
+        transform: rotate(0);
+      }
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      transform: rotate(-90deg);
+      transition: transform 150ms;
+    }
+  }
+}

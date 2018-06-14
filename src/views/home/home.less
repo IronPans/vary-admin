@@ -1,6 +1,153 @@
-@import "../../styles/mixin.less";
+.weather-full-info {
+  color: #cbcbcb;
 
-.v-home {
-  position: relative;
-  height: 100%;
+  h1 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0 0 5px 0;
+  }
+
+  ul {
+    margin-bottom: 0;
+
+    li {
+      display: inline-block;
+      width: 16%;
+      text-align: center;
+      box-sizing: border-box;
+      border-left: 1px solid #f1f2f7;
+
+      i {
+        font-size: 25px;
+      }
+    }
+  }
+
+  .statistics {
+    padding-top: 5px;
+
+    &:after {
+      content: "o";
+      position: relative;
+      top: -5px;
+      font-size: 10px;
+    }
+  }
+
+  .today-status {
+    i {
+      font-size: 40px;
+    }
+  }
+
+  .degree {
+    font-size: 30px;
+    font-weight: 600;
+    display: inline-block;
+    padding-left: 20px;
+
+    &:after {
+      content: "o";
+      position: relative;
+      top: -12px;
+      font-size: 16px;
+    }
+  }
+}
+
+.user-full-info {
+  &:hover {
+    .user-avatar {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+
+
+  .user-avatar {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 90px;
+    height: 90px;
+    padding: 3px;
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0;
+    transform: translate(-50%, -50%);
+    transition: all .3s;
+  }
+
+  .user-info {
+    padding-top: 50px;
+    text-align: center;
+
+    h3 {
+      margin: 5px 0 0 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.calendar-box {
+  .va-card-content {
+    padding: 0 !important;
+  }
+
+  .calendar-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding:50px 40px 0 40px;
+    box-sizing: border-box;
+    height: 200px;
+    color: #fff;
+    background-image: url(../../assets/images/bg/weathernew.jpg);
+    background-size: cover;
+  }
+
+  .va-date-picker-wrapper {
+    box-shadow: none !important;
+  }
+
+  .calendar-today {
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .calendar-weather {
+    //position: absolute;
+    //left: 40px;
+    //bottom: 20px;
+  }
+
+  .climacon_component-stroke {
+    fill: #fff;
+  }
+
+  .degree {
+    position: relative;
+    font-size: 50px;
+    line-height: 50px;
+    display: inline-block;
+    padding-left: 20px;
+    color: #fff;
+
+    sup {
+      position: relative;
+      top: -.5em;
+      font-size: 75%;
+      line-height: 0;
+      vertical-align: baseline;
+    }
+  }
 }

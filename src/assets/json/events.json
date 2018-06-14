@@ -1,0 +1,80 @@
+{
+    "data": [
+    	{
+            "id": 1,
+    		"title": "All Day Event",
+    		"start": "2018-06-01",
+			"className": "bg-danger"
+    	},
+    	{
+            "id": 2,
+    		"title": "Long Event",
+    		"start": "2018-06-07",
+    		"end": "2018-06-10",
+			"className": "bg-primary"
+    	},
+    	{
+    		"id": 3,
+    		"title": "Repeating Event",
+    		"start": "2018-06-09T16:00:00",
+			"className": "bg-primary"
+    	},
+    	{
+    		"id": 4,
+    		"title": "Repeating Event",
+    		"start": "2018-06-16T16:00:00",
+			"className": "bg-primary"
+    	},
+    	{
+            "id": 5,
+    		"title": "Conference",
+    		"start": "2018-06-11",
+    		"end": "2018-06-13",
+			"className": "bg-primary"
+    	},
+    	{
+            "id": 6,
+    		"title": "Meeting",
+    		"start": "2018-06-12T10:30:00",
+    		"end": "2018-06-12T12:30:00",
+			"className": "bg-primary"
+    	},
+    	{
+            "id": 7,
+    		"title": "Lunch",
+    		"start": "2018-06-12T12:00:00",
+			"className": "bg-primary"
+    	},
+    	{
+            "id": 8,
+    		"title": "Meeting",
+    		"start": "2018-06-12T14:30:00",
+			"className": "bg-primary"
+    	},
+    	{
+            "id": 9,
+    		"title": "Happy Hour",
+    		"start": "2018-06-12T17:30:00",
+			"className": "bg-primary"
+    	},
+    	{
+            "id": 10,
+    		"title": "Dinner",
+    		"start": "2018-06-12T20:00:00",
+			"className": "bg-primary"
+    	},
+    	{
+            "id": 11,
+    		"title": "Birthday Party",
+    		"start": "2018-06-13T07:00:00",
+			"className": "bg-primary"
+    	},
+    	{
+            "id": 12,
+    		"title": "Click for Google",
+    		"url": "http://google.com/",
+    		"start": "2018-06-28",
+			"className": "bg-primary"
+    	}
+    ]
+}

@@ -1,0 +1,18 @@
+.va-autocomplete {
+  position: relative;
+  display: inline-flex;
+
+  .va-autocomplete-menus {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 100%;
+    transform-origin: left top 0;
+    box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
+
+    &.va-autocomplete-scroll {
+      overflow: hidden;
+      overflow-y: auto;
+    }
+  }
+}

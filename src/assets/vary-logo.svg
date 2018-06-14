@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="94" viewBox="0 0 94 94">
+    <defs>
+        <linearGradient id="linear-gradient" gradientUnits="userSpaceOnUse" x1="47" y1="94" x2="47">
+            <stop offset="0" stop-color="#1691f5"/>
+            <stop offset="1" stop-color="#3369E6"/>
+        </linearGradient>
+    </defs>
+    <style type="text/css">
+        .c-white {
+            fill: #fff;
+        }
+        .c-linear {
+            fill: url('#linear-gradient');
+        }
+    </style>
+    <g>
+        <rect width="94" height="94" rx="4" ry="4" fill="transparent"/>
+        <text x="10" y="75"
+              font-family="Tangerine"
+              font-size="80" font-weight="bold" class="c-linear" fill-rule="evenodd"> V </text>
+    </g>
+</svg>

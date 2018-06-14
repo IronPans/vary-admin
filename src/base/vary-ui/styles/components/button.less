@@ -1,0 +1,165 @@
+
+.va-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  touch-action: manipulation;
+  border: none;
+  white-space: nowrap;
+  padding: 8px 16px;
+  min-height: 36px;
+  min-width: 88px;
+  font-size: 14px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  outline: none;
+  line-height: 1;
+  user-select: none;
+  text-decoration: none;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+  &[type="button"] {
+    appearance: none;
+  }
+
+  &:hover {
+    text-decoration: none;
+    opacity: .8;
+  }
+
+  .color(va-button);
+
+  &.va-button-default {
+    color: #424242;
+    background-color: #fff;
+  }
+
+  &.va-button-primary,
+  &.va-button-success,
+  &.va-button-info,
+  &.va-button-warning,
+  &.va-button-danger {
+    color: #fff;
+  }
+
+  &:not(.is-disabled) {
+    &:active, &.is-active {
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  &.va-button-block {
+    display: flex;
+    width: 100%;
+  }
+
+  &.va-button-fab {
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    line-height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.va-button-lg {
+    padding: 8px 24px;
+    min-width: 112px;
+    font-size: 16px;
+    min-height: 40px;
+
+    &.va-button-fab {
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      line-height: 40px;
+    }
+  }
+
+  &.va-button-sm {
+    padding: 7px 8px;
+    min-width: 64px;
+    font-size: 13px;
+    min-height: 32px;
+
+    &.va-button-fab {
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      line-height: 32px;
+    }
+  }
+
+  &.is-disabled,
+  &[disabled] {
+    border: 1px solid #d9d9d9;
+    cursor: not-allowed;
+    opacity: .65;
+    filter: alpha(opacity=65);
+    box-shadow: none;
+  }
+
+  i.va-button-left {
+    padding-right: 5px;
+  }
+
+  i.va-button-right {
+    padding-left: 5px;
+  }
+
+  &.va-button-rounded {
+    border-radius: 60px;
+  }
+}
+
+.va-button,
+.va-button-group {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
+}
+
+.va-button.is-flat,
+.va-button-group.is-flat{
+  box-shadow: none !important;
+}
+
+.va-button-group {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 3px;
+
+  > .va-button {
+    border-radius: 0;
+    box-shadow: none;
+
+    &:first-child {
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+  }
+}
+
+.is-flat {
+
+  &.va-button {
+    border: 1px solid transparent;
+  }
+
+  .flat-button(va-button);
+}

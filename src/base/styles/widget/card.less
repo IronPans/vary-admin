@@ -1,0 +1,288 @@
+.va-card-widget {
+  margin: 20px 0 0;
+  text-align: right;
+  position: relative;
+
+  &:hover {
+    .va-card-widget-header {
+      .va-icon {
+        top: -25px;
+      }
+    }
+  }
+
+  .va-card-widget-header {
+
+    .va-icon {
+      position: absolute;
+      top: -15px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      font-size: 36px;
+      color: #007ae1;
+      border-radius: 5px;
+      transition: all .3s ease-in-out;
+    }
+
+    .va-card-widget-avatar {
+      padding: 10px;
+      margin-bottom: 5px;
+      color: #fff;
+    }
+  }
+}
+
+.va-card-order {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+
+  .va-card-block {
+
+    h6 {
+      margin: 0;
+    }
+
+    p {
+      line-height: 1.4;
+    }
+
+    .va-card-icon {
+      position: absolute;
+      right: -17px;
+      top: 20px;
+      font-size: 100px;
+      opacity: 0.5;
+    }
+  }
+}
+
+.va-card-statustic-progress {
+  label {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 75%;
+    padding: 0 7px;
+    margin-right: 5px;
+    font-weight: 400;
+    border-radius: 4px;
+    color: #fff;
+
+    .va-icon {
+      font-size: 14px;
+    }
+  }
+
+  &.va-card .va-card-header {
+    border: none;
+  }
+}
+
+.va-card-databox {
+  width: 100%;
+  padding: 0;
+  color: #fff;
+
+  .va-card-content {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 !important;
+
+    .va-knob {
+      display: flex;
+    }
+  }
+
+  .va-card-databox-left {
+    position: relative;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px;
+  }
+
+  .va-card-databox-right {
+    position: relative;
+    flex: 1 0 100%;
+    height: 100%;
+    margin: 0;
+    padding: 5px 10px;
+    box-sizing: border-box;
+
+    .va-card-databox-number {
+      display: block;
+      font-size: 17px;
+      margin: 2px;
+      line-height: 26px;
+      position: relative;
+    }
+
+    .va-card-databox-text {
+      display: block;
+      font-size: 11px;
+      margin: 4px 0 2px;
+      position: relative;
+    }
+
+    .va-card-databox-stat {
+      display: inline-block;
+      position: absolute;
+      right: 7px;
+      top: 7px;
+      padding: 2px 5px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.va-card-images {
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    .va-card-bg {
+      transform: scale(1.2);
+    }
+  }
+
+  .va-card-content {
+    height: 100%;
+  }
+
+  .va-card-bg {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    opacity: 1;
+    transition: all .3s;
+  }
+
+  .va-card-context {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 16px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .title {
+      display: block;
+    }
+  }
+}
+
+.va-card-board {
+  position: relative;
+  perspective: 600px;
+  color: #fff;
+  font-size: 14px;
+
+  &.va-card {
+    box-shadow: none;
+  }
+
+  .va-card-content {
+    padding: 0;
+  }
+
+  .front {
+    height: 100%;
+    position: relative;
+    width: 100%;
+    padding: 16px;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transform: rotateX(0deg) rotateY(0deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: all .4s ease-in-out;
+    box-shadow: 0 2px 10px -1px rgba(69,90,100,.3);
+  }
+
+  .back {
+    position: absolute;
+    top: 0;
+    border: 0;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    z-index: 10;
+    color: hsla(0,0%,100%,.7);
+    border-radius: 6px;
+    box-sizing: border-box;
+    transform: rotateY(-179deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: all .4s ease-in-out;
+    box-shadow: 0 2px 10px -1px rgba(69,90,100,.3);
+
+    > div {
+      height: 100%;
+
+      a.text-link {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+
+    .va-icon {
+      display: block;
+    }
+  }
+
+  &:hover .front {
+    z-index: 11;
+    transform: rotateY(180deg)
+  }
+
+  &:hover .back {
+    z-index: 12;
+    transform: rotateX(0deg) rotateY(0deg)
+  }
+}
+
+.va-card-tile {
+  .va-card-content {
+    padding: 0;
+  }
+
+  .lined-paper {
+    position: relative;
+    padding: 30px 15px 30px 55px!important;
+    line-height: 30px;
+    background-color: #fbf9e4;
+    background-image: linear-gradient(#f6abca 1px,transparent 0),linear-gradient(#f6abca 1px,transparent 0),linear-gradient(#e8e8e8 1px,transparent 0);
+    background-size: 1px 1px,1px 1px,30px 30px;
+    background-repeat: repeat-y,repeat-y,repeat;
+    background-position: 42px 0,46px 0,0 -1px;
+
+    &.blue {
+      background-image: linear-gradient(90deg, #b6d7e8, 2px, transparent, 2px, transparent), linear-gradient(0, #d9eaf3, 1px, transparent, 2px, transparent);
+      background-position: 42px 0,46px 0,0 -1px;
+      background-size: 100% 30px;
+    }
+  }
+}

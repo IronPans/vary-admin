@@ -1,0 +1,41 @@
+.va-breadcrumb {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+
+  & > li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+
+    > .va-icon {
+      font-size: 16px;
+      padding-right: 5px;
+    }
+
+    .va-breadcrumb-separator {
+      padding: 0 5px;
+    }
+
+    > .va-icon,
+    .va-breadcrumb-separator,
+    .va-breadcrumb-title {
+      opacity: .5;
+    }
+
+    &:last-child .va-breadcrumb-title {
+      opacity: 1;
+      font-weight: 500;
+    }
+
+    &:not(:last-child) .va-breadcrumb-title {
+      cursor: pointer;
+
+      &:active,
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

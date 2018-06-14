@@ -1,0 +1,194 @@
+@swiperBulletColor: #fff;
+
+.va-swiper {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  &:hover .va-swiper-disabled {
+    opacity: .35 !important;
+  }
+
+  .va-swiper-wrapper {
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    box-sizing: content-box;
+  }
+
+  &.va-swiper-vertical {
+    .va-swiper-list {
+      flex-direction: column;
+    }
+
+    .va-swiper-pagination-bullets {
+      flex-direction: column;
+    }
+  }
+
+  .va-swiper-wrapper,
+  .va-swiper-slide {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .va-swiper-list {
+    position: relative;
+    display: flex;
+    transition-property: transform;
+    transition-timing-function: ease;
+  }
+
+  .va-swiper-slide {
+    opacity: 0;
+    pointer-events: none;
+
+    &.va-swiper-slide-active {
+      pointer-events: auto;
+    }
+  }
+
+  .va-swiper-slide {
+    display: block;
+    width: 100%;
+    height: auto;
+    flex: 1 0 auto;
+    box-sizing: border-box;
+    img {
+      display: flex;
+      user-select: none;
+      -webkit-user-drag: none;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .va-swiper-pagination-bullets {
+    display: flex;
+  }
+
+  .va-swiper-pagination {
+    position: absolute;
+    text-align: center;
+    z-index: 10;
+    bottom: 10px;
+    left: 50%;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    transform: translate3d(-50%, 0, 0);
+
+    &.va-swiper-black {
+      background: #000;
+    }
+
+    .va-swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      background: @swiperBulletColor;
+      cursor: pointer;
+      opacity: .3;
+      margin: 0 5px;
+      transition: all .25s;
+
+      &:hover {
+        opacity: .5;
+      }
+
+      &.va-swiper-pagination-bullet-active {
+        opacity: 1;
+      }
+    }
+
+  }
+
+  &.va-swiper-vertical .va-swiper-pagination {
+    right: 10px;
+    left: auto;
+    bottom: auto;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+
+    .va-swiper-pagination-bullet {
+      display: block;
+      margin: 5px 0;
+
+      &.va-swiper-pagination-bullet-active {
+        opacity: 1;
+      }
+    }
+  }
+
+  .va-swiper-pagination-bullet.va-swiper-pagination-clickable {
+    cursor: pointer
+  }
+
+  .va-swiper-next, .va-swiper-prev {
+    position: absolute;
+    top: 50%;
+    width: 35px;
+    height: 35px;
+    margin-top: -11px;
+    z-index: 10;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all .3s;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 13px;
+      height: 22px;
+      transform: translate(-50%, -50%);
+      background-size: 13px 22px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    &.va-swiper-disabled {
+      opacity: .35;
+      cursor: auto;
+      pointer-events: none;
+    }
+
+    &:not(.va-swiper-disabled):hover {
+      background: rgba(0,0,0,.1);
+    }
+  }
+
+  .va-swiper-prev {
+    &:before {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E");
+    }
+    left: 20px;
+    right: auto;
+  }
+
+  .va-swiper-next {
+    &:before {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E");
+    }
+    right: 20px;
+    left: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .va-swiper-prev,
+  .va-swiper-next {
+    transform: scale(.5);
+  }
+}

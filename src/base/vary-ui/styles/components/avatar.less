@@ -1,0 +1,23 @@
+@import "../mixin/color";
+
+.va-avatar {
+  display: inline-flex;
+  position: relative;
+  overflow: hidden;
+  font-size: 25px;
+  flex-shrink: 0;
+  align-items: center;
+  user-select: none;
+  border-radius: 50%;
+  justify-content: center;
+
+  > img,
+  > i {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    object-fit: cover;
+  }
+
+  .color(va-avatar)
+}

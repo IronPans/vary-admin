@@ -1,0 +1,42 @@
+
+.va-rate {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+
+  .va-rate-item {
+    position: relative;
+    cursor: pointer;
+    line-height: 0;
+    color: #e8e8e8;
+    font-size: inherit;
+
+    .va-rate-inner {
+      display: inline-block;
+      padding: 0 4px;
+      box-sizing: border-box;
+    }
+
+    .va-rate-half {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 10;
+      opacity: 0;
+      overflow: hidden;
+      padding-right: 0;
+    }
+
+    .va-rate-active {
+      color: #ffa726;
+    }
+  }
+
+  &.va-rate-readonly {
+    .va-rate-item {
+      cursor: not-allowed;
+    }
+  }
+}

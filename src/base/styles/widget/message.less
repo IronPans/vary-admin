@@ -1,0 +1,150 @@
+@import "../../vary-ui/styles/mixin/scroll";
+
+.chat-list {
+
+  .va-list-item {
+
+    &.active,
+    &:hover {
+      background: #007bff !important;
+      color: #fff;
+
+      .text-muted,
+      small {
+        color: #fff !important;
+      }
+    }
+  }
+}
+
+.message-box {
+  background: #fff;
+
+  .messages {
+    max-height: 300px;
+    padding: 10px;
+    overflow: hidden;
+    overflow-y: auto;
+
+    .custom-scroll();
+
+    .message {
+      position: relative;
+      margin: 10px 0;
+      overflow: hidden;
+
+      .message-text {
+        position: relative;
+        float: right;
+        padding: 10px 24px;
+        border-radius: 25px;
+        margin-bottom: 2px;
+        font-size: 16px;
+        clear: both;
+
+        &:first-child {
+          margin-top: 15px;
+
+          &:before,
+          &:after {
+            content: '';
+            position: absolute;
+            top: 0px;
+            width: 40px;
+            height: 20px;
+          }
+        }
+
+        &:before,
+        &:after {
+          border-radius: 100%;
+        }
+      }
+
+      .user-picture {
+        position: absolute;
+        left: 0;
+        top: 15px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+      }
+
+      &.left {
+        transform-origin: left;
+
+        .message-text {
+          margin-right: 70px;
+          margin-left: 55px;
+          background-color: #f0f0f0;
+          color: rgba(0, 0, 0, 0.87);
+          float: left;
+
+          &:before {
+            left: -16px;
+            background-color: #f0f0f0;
+            border-radius: 0;
+          }
+
+          &:after {
+            top: -1px;
+            left: -50px;
+            background-color: #fff;
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+
+      &.right {
+        transform-origin: right;
+
+        .user-picture {
+          left: auto;
+          right: 0;
+        }
+
+        .message-text {
+          margin-left: 70px;
+          margin-right: 55px;
+          background-color: #2095f2;
+          color: #fff;
+          float: right;
+
+          &:before {
+            right: -16px;
+            border-radius: 0;
+            background-color: #2095f2;
+          }
+
+          &:after {
+            top: -1px;
+            right: -49px;
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .send-message {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+
+    .va-input {
+      flex: 1;
+      margin-right: 5px;
+    }
+
+    .va-button {
+      .va-icon {
+        font-size: 20px;
+      }
+    }
+  }
+}

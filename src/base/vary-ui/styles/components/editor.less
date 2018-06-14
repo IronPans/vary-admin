@@ -1,0 +1,585 @@
+
+.va-editor {
+  position: relative;
+  min-height: 8rem;
+  display: flex;
+  flex-direction: column;
+  color: #222;
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+
+  &:-webkit-full-screen {
+    width: 100%;
+    height: 100%;
+  }
+
+  &.va-editor-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 10100;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  &:focus {
+    border-color: #66afe9 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+
+  .va-editor-toolbar {
+    position: relative;
+    line-height: 1.2;
+    box-sizing: border-box;
+    border-top: 5px solid #222222;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 0 2px;
+    display: flex;
+    flex-wrap: wrap;
+    color: #222;
+    background: #fff;
+
+    .va-editor-tooltip {
+      position: relative;
+
+      &:before {
+        content: attr(data-tooltip);
+        font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        z-index: 1;
+        font-size: 12px;
+        padding: 4px 8px;
+        box-sizing: border-box;
+        opacity: 0;
+        pointer-events: none;
+        color: #fff;
+        border-radius: 3px;
+        white-space: nowrap;
+        background: #383838;
+        transform: translate(-50%, 0);
+      }
+
+      &:hover:before {
+        opacity: 1;
+      }
+    }
+
+    .va-editor-toolbar-icon {
+      position: relative;
+      font: 16px 'Material Icons';
+      margin: 0;
+      text-decoration: none;
+      vertical-align: top;
+      float: left;
+      cursor: pointer;
+      user-select: none;
+      padding: 8px 12px;
+      transition: all .2s;
+
+      &.va-editor-dropdown {
+        &:after {
+          position: absolute;
+          width: 0;
+          height: 0;
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-top: 4px solid #222222;
+          right: 2px;
+          top: 50%;
+          transform: translate(0, -50%);
+          content: "";
+        }
+      }
+
+      &.active {
+        color: #1e88e5;
+      }
+
+      &:hover {
+        background: #ebebeb;
+      }
+
+      &.va-disabled {
+        color: #bdbdbd;
+        cursor: default;
+      }
+    }
+  }
+
+  .va-editor-counter {
+    position: absolute;
+    bottom: 0;
+    padding: 5px;
+    right: 0;
+    color: #cccccc;
+    font-size: 15px;
+    line-height: 1;
+    z-index: 1;
+    background: #fff;
+    border-top: solid 1px #ebebeb;
+    border-left: solid 1px #ebebeb;
+    border-radius: 2px 0 0 0;
+  }
+
+  .va-editor-content {
+    position: relative;
+    flex: 1 0 auto;
+    box-sizing: border-box;
+    border-radius: 0 0 2px 2px;
+
+    .va-editor-wrapper {
+      outline: none;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow-y: auto;
+
+      & ::selection,
+      & ::-moz-selection {
+        background: #b5d6fd !important;
+        color: #000 !important;
+      }
+
+      p,
+      div {
+        margin: 0;
+        line-height: 1.5;
+        font-size: 15px;
+      }
+
+      a {
+        color: #2489C5;
+        cursor: auto !important;
+      }
+
+      ul,
+      ol {
+        padding-left: 1rem;
+      }
+
+      ul li {
+        list-style-type: disc;
+      }
+
+      img {
+        max-width: 100%;
+
+        &.va-editor-image-selected {
+          border: 2px solid #1e88e5;
+          border-radius: 3px;
+        }
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 30px;
+      }
+    }
+
+    table {
+      border: none;
+      border-collapse: collapse;
+      empty-cells: show;
+      max-width: 100%;
+      margin: 1rem 0;
+
+      tr {
+        user-select: none;
+
+        th {
+          background: #ebebeb;
+        }
+
+        td,
+        th {
+          padding: 2px 5px;
+          border: 1px solid #ddd;
+          text-align: left;
+          vertical-align: middle !important;
+          user-select: text;
+
+          &.va-selected-cell {
+            border: 1px double #1e88e5;
+          }
+        }
+      }
+    }
+  }
+
+  .va-editor-table-resizer {
+    cursor: col-resize;
+    position: fixed;
+    padding: 0 .25rem;
+    z-index: 3;
+    display: none;
+
+    .va-editor-table-resizer-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 100%;
+      width: 1px;
+      background: #1e88e5;
+      opacity: 0;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .va-editor-popup {
+    position: absolute;
+    padding: .25rem;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
+    border-radius: 3px;
+    border: none;
+    border-top: 5px solid #222;
+
+    &:after {
+      clear: both;
+      display: block;
+      content: "";
+      height: 0;
+    }
+
+    .image-size {
+
+      input {
+        width: 2.5rem;
+        border-radius: 2px;
+        border: 1px solid #d9d9d9;
+        padding: 0 .25rem;
+        height: 1.25rem;
+
+        & + span {
+          padding-left: .25rem;
+        }
+      }
+    }
+
+    &.va-editor-popup-left {
+      .arrow {
+        left: .25rem;
+        transform: translate(0, 0);
+      }
+    }
+
+    &.va-editor-popup-right {
+      .arrow {
+        left: auto;
+        right: .25rem;
+        transform: translate(0, 0);
+      }
+    }
+
+    .arrow {
+      position: absolute;
+      top: -1rem;
+      left: 50%;
+      width: 1rem;
+      height: 1rem;
+      background: transparent;
+      transform: translate(-50%, 0);
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 10px solid transparent;
+        border-bottom-color: #222;
+      }
+    }
+
+    &.va-editor-popup-top {
+      border: none;
+      border-bottom: 5px solid #222;
+      .arrow {
+        top: 100%;
+
+        &:after {
+          border-bottom-color: transparent;
+          border-top-color: #222;
+        }
+      }
+    }
+
+    .va-editor-table-button {
+
+      &:after {
+        clear: both;
+        display: block;
+        content: "";
+        height: 0;
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-align: left;
+        margin: 0 2px;
+        border-radius: 0;
+        background-clip: padding-box;
+        z-index: 2;
+        position: relative;
+        user-select: none;
+        float: left;
+        padding: 0;
+        width: 38px;
+        height: 38px;
+        color: #222;
+
+        i {
+          display: block;
+          font-size: 14px;
+          width: 14px;
+          text-align: center;
+          float: left;
+          margin-left: 8px;
+        }
+
+        &.va-editor-dropdown-menu {
+          i {
+            margin-right: 16px;
+          }
+          &:after {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #222;
+            right: 4px;
+            top: 17px;
+            content: ""
+          }
+        }
+
+        &:hover,
+        ul li:hover {
+          background: #ebebeb;
+        }
+
+        ul {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: #fff;
+          display: none;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 2px 2px 1px rgba(0, 0, 0, 0.14);
+
+          &.hide {
+            display: none;
+          }
+
+          li {
+            list-style: none;
+            cursor: pointer;
+            white-space: nowrap;
+            padding: .2rem .5rem;
+          }
+        }
+      }
+    }
+  }
+
+  .va-editor-cache {
+    position: absolute;
+    top: 2rem;
+    right: .25rem;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
+    padding: .25rem .5rem;
+    background: #fff;
+    border-radius: 3px;
+  }
+
+  .va-editor-modal-portal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 50%;
+    background: #fff;
+    padding: 2px 0;
+    margin-top: 10px;
+    border-top: 5px solid #222;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
+    border-radius: 3px;
+
+    .va-emotion-item {
+      display: inline-block;
+      padding: .25rem;
+      line-height: 0;
+      transition: all .3s;
+      vertical-align: top;
+      cursor: pointer;
+      .va-editor-emotion {
+        display: block;
+      }
+
+      &:hover {
+        background: #ebebeb;
+      }
+    }
+
+    .va-editor-modal-arrow {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid #222;
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      margin-left: -5px;
+      display: inline-block;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 3px 0;
+      padding: 0 1rem;
+      line-height: 1.1;
+      cursor: pointer;
+
+      &:hover {
+        color: HighlightText;
+        background-color: Highlight;
+      }
+    }
+
+    .va-editor-fontSize {
+      max-height: 7rem;
+      overflow: hidden;
+      overflow-y: auto;
+
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          list-style: none;
+
+          span {
+            padding: .2rem .75rem;
+            cursor: pointer;
+          }
+
+          &:hover,
+          &.active {
+            background: #ebebeb;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .va-editor-table {
+      padding: .5rem;
+      line-height: .5rem;
+      text-align: center;
+
+      & > p {
+        padding-bottom: .5rem;
+        line-height: 22px;
+      }
+
+      .va-editor-table-wrapper {
+        overflow: hidden;
+        border-top: 1px solid #ddd;
+        border-left: 1px solid #ddd;
+        line-height: 1px;
+
+        br {
+          line-height: 1px;
+        }
+
+        .va-editor-table-td {
+          display: block;
+          line-height: 1px;
+          border-right: 1px solid #ddd;
+          border-bottom: 1px solid #ddd;
+          float: left;
+
+          span {
+            display: block;
+            width: .6rem;
+            height: .6rem;
+          }
+
+          &.active {
+            span {
+              background: rgba(30, 136, 229, 0.3);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .va-editor-link {
+    padding: 5px;
+
+    button {
+      font-size: .65rem;
+    }
+  }
+
+  .va-editor-link-input {
+    padding: 0 .5rem;
+    height: 1.25rem;
+    border-radius: 2px;
+    border: 1px solid #d9d9d9;
+  }
+
+  .va-editor-confirm {
+    background: #2489C5;
+    color: #fff;
+    border: none;
+    padding: 0 10px;
+    height: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 2px;
+
+    &:active {
+      opacity: .8;
+    }
+  }
+
+  .va-editor-file {
+    .va-editor-upload {
+      position: relative;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      margin: .5rem;
+      text-align: center;
+      background: #ddd;
+      overflow: hidden;
+
+      .va-editor-file-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        width: 100%;
+        cursor: pointer;
+      }
+    }
+  }
+
+}

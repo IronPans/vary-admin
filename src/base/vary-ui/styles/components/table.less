@@ -1,0 +1,207 @@
+@border: 1px solid #e9ecef;
+
+.va-table {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    overflow: hidden;
+    table-layout: fixed;
+    box-sizing: border-box;
+
+    thead tr th {
+      font-size: 75%;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.54);
+      border-bottom: @border;
+    }
+  }
+
+  .va-table-head {
+    position: relative;
+    font-weight: 600;
+    text-align: left;
+
+    &.va-table-head-order {
+      width: 45px;
+    }
+  }
+
+  .va-expand-arrow {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+      background: rgba(0, 0, 0, .2);
+    }
+  }
+
+  .va-column-resizer {
+    display: block;
+    position: absolute !important;
+    top: 0;
+    right: -5px;
+    margin: 0;
+    width: 10px;
+    height: 100%;
+    padding: 0;
+    cursor: col-resize;
+    border: 1px solid transparent;
+  }
+
+  .va-column-resizer-line {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 1px;
+    cursor: col-resize;
+  }
+
+  .va-table-body {
+    overflow: auto;
+
+    table {
+      border-right: none;
+    }
+  }
+
+  .va-table-head-inner {
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: all .4s cubic-bezier(.25, .8, .25, 1);
+  }
+
+  .va-table-head .va-table-head-text {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .va-checkbox {
+      display: flex;
+    }
+
+    .va-table-head-sort {
+      width: 14px;
+      line-height: 8px;
+      display: inline-block;
+      padding-left: 5px;
+      box-sizing: border-box;
+      color: #aaa;
+      cursor: pointer;
+
+      i {
+        line-height: 4px;
+        height: 6px;
+        font-size: 12px;
+        overflow: hidden;
+
+        &:hover,
+        &.active {
+          color: #333;
+        }
+      }
+    }
+
+  }
+
+  .va-table-row {
+    border-top: @border;
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .va-table-cell-inner {
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .va-table-cell {
+    position: relative;
+    transition: all .4s cubic-bezier(.25, .8, .25, 1);
+  }
+
+  tbody .va-table-row.va-selected .va-table-cell {
+    background-color: #f5f5f5
+  }
+
+  &.va-table-hover {
+    tr {
+      cursor: pointer;
+    }
+
+    tbody .va-table-row:hover .va-table-cell {
+      background-color: #eee
+    }
+  }
+
+  &.va-table-striped tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  &.va-table-bordered table {
+    border: @border;
+    tr td,
+    tr th {
+      border-left: @border;
+
+      &:first-child {
+        border-left: none;
+      }
+    }
+  }
+
+  .va-table-head-selection,
+  .va-table-head-expand {
+    text-align: center;
+    min-width: 62px;
+    width: 62px;
+    word-break: break-all;
+  }
+
+  .va-table-footer {
+    flex: 1 0 auto;
+    padding: 10px 0;
+    box-sizing: border-box;
+  }
+
+  .va-table-scrollable {
+    .va-table-scrollable-head {
+      border: @border;
+      border-bottom: none;
+      background: #f5f5f5;
+
+      table {
+        border: none;
+      }
+    }
+  }
+
+  &.va-table-sort,
+  .va-table-head-sort {
+    .va-table-head-inner {
+      cursor: pointer;
+      transition: all .25s;
+      &:hover {
+        background: #eee;
+      }
+    }
+  }
+}

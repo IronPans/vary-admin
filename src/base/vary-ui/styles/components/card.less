@@ -1,0 +1,72 @@
+@borderColor: rgba(204, 204, 204, 0.35);
+
+.va-card {
+  box-sizing: border-box;
+  border-radius: 4px;
+  z-index: 1;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+
+  .va-card-header,
+  .va-card-footer,
+  .va-card-media {
+    display: flex;
+    align-items: center;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .va-card-header {
+    padding: 16px;
+    font-weight: 500;
+    box-sizing: border-box;
+    position: relative;
+    white-space: nowrap;
+    border-bottom: 1px solid @borderColor;
+
+    > .va-avatar {
+      border-radius: 50%;
+      margin-right: 16px;
+    }
+
+    .va-card-header-inner {
+      flex: 1 0 auto;
+
+      .va-card-header-title,
+      .va-card-header-subtitle {
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.71429em;
+        color: rgba(0, 0, 0, 0.87);
+      }
+
+      .va-card-header-subtitle {
+        color: rgba(0, 0, 0, 0.54);
+      }
+    }
+
+    + .va-card-content {
+      padding-top: 8px;
+    }
+  }
+
+  .va-card-content {
+    position: relative;
+    box-sizing: border-box;
+    padding: 16px;
+  }
+
+  .va-card-media {
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .va-card-footer {
+    padding: 8px;
+    position: relative;
+  }
+}

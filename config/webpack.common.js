@@ -3,24 +3,26 @@ const helpers = require('./helpers');
 const os = require('os');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
 
 const HappyPack = require('happypack');
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
 
-const { VueLoaderPlugin } = require('vue-loader');
+const {VueLoaderPlugin} = require('vue-loader');
 
 module.exports = (env) => {
     const isProduction = process.env.NODE_ENV === 'production';
     return {
         entry: {
-            app: helpers.root('./src/app.js'),
-            vendor: helpers.root('./src/vendors/vendor.js')
+            app: helpers.root('./src/app.js')
+            // base: helpers.root('./src/vendors/base.js'),
+            // extend: helpers.root('./src/vendors/extend.js')
         },
         resolve: {
-            modules: [
-                helpers.root('src'),
-                helpers.root('./node_modules')],
+            modules: [helpers.root('src'), helpers.root('./node_modules')],
             extensions: ['.vue', '.js', '.json'],
             alias: {
                 '@': helpers.root('./src'),
@@ -40,6 +42,39 @@ module.exports = (env) => {
                     }
                 },
                 {
+                    test: /\.(less|css)$/,
+                    use: [
+                        //'style-loader',
+                        MiniCssExtractPlugin.loader,
+                        'css-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                ident: 'postcss',
+                                plugins: () => [
+                                    autoprefixer({
+                                        browsers: [
+                                            'last 2 versions',
+                                            'Firefox ESR',
+                                            '> 1%',
+                                            'ie >= 9',
+                                            'iOS >= 8',
+                                            'Android >= 4'
+                                        ]
+                                    }),
+                                    cssnano({
+                                        preset: 'default',
+                                        zindex: false,
+                                        reduceIdents: false
+                                    }),
+                                ],
+                                sourceMap: true
+                            },
+                        },
+                        'less-loader'
+                    ]
+                },
+                {
                     test: /\.js$/,
                     loader: 'happypack/loader?id=happybabel',
                     exclude: /node_modules/
@@ -47,16 +82,14 @@ module.exports = (env) => {
                 {
                     test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
                     loader: 'url-loader?limit=1024'
-                },
-                {
-                    test: /\.html$/,
-                    loader: 'html-loader'
                 }
             ]
         },
         plugins: [
-            new VueLoaderPlugin(),
-            new ExtractTextPlugin("app.css"),
+            new MiniCssExtractPlugin({
+                filename: 'app.css',
+                chunkFilename: 'app.[contenthash:12].css'
+            }),
             new HappyPack({
                 id: 'happybabel',
                 loaders: ['babel-loader'],
@@ -64,8 +97,9 @@ module.exports = (env) => {
                 verbose: true
             }),
             new HtmlWebpackPlugin({
-                title: 'vary-admin',
+                title: 'Vary Admin',
                 template: './src/index.html',
+                favicon: './favicon.ico',
                 chunksSortMode: function (a, b) {
                     const entryPoints = ['vendor', 'app'];
                     return entryPoints.indexOf(a.names[0]) - entryPoints.indexOf(b.names[0]);
@@ -85,7 +119,8 @@ module.exports = (env) => {
                     minifyCSS: true,
                     minifyURLs: true,
                 } : null
-            })
+            }),
+            new VueLoaderPlugin()
         ]
     }
 }

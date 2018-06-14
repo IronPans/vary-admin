@@ -1,0 +1,114 @@
+.email-wrapper {
+  .va-list {
+    border: none;
+  }
+
+  .va-card-content {
+    padding: 20px 0 !important;
+  }
+
+
+  .mail-sidebar,
+  .mail-list-container {
+    border-right: 1px solid #d9d9d9;
+  }
+
+  .mail-sidebar {
+
+    .menu-bar {
+      .va-icon {
+        font-size: 15px !important;
+      }
+
+      .va-list-item {
+        border-left: 4px solid #fff;
+
+        &.active,
+        &:hover {
+          color: #007bff;
+          background-color: #dfe9ff;
+        }
+
+        &.active {
+          border-left-color: #007bff;
+        }
+
+        &:hover {
+          border-left-color: #dfe9ff;
+        }
+      }
+    }
+
+    .va-list-item-content {
+      > .va-icon {
+        font-size: 18px;
+      }
+    }
+
+    .label-list {
+      h5 {
+        padding: 10px 20px;
+        margin: 0;
+      }
+
+      .va-list {
+        .va-list-item-content {
+          padding: 0 20px;
+        }
+      }
+
+      .va-list-item:not(:last-child):after {
+        height: 0;
+      }
+
+      .va-list-item-text {
+        display: flex;
+        align-items: center;
+
+        > .va-badge {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  .mail-body {
+
+    .mail-body-header {
+      padding: 10px;
+      z-index: 1;
+      position: relative;
+
+      .va-icon {
+        font-size: 18px;
+      }
+    }
+
+    .va-pagination {
+      margin-right: 16px;
+      justify-content: flex-end;
+    }
+
+    .va-table {
+      margin-top: -40px;
+      font-size: 13px;
+
+      thead {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .va-icon {
+        font-size: 18px;
+      }
+
+      tbody .va-table-row:hover .va-table-cell {
+        background-color: #dfe9ff
+      }
+    }
+  }
+}
+
+.form-group {
+
+}

@@ -1,18 +1,30 @@
 <template>
-    <div class="v-main">
-        <router-view></router-view>
-    </div>
+    <router-view></router-view>
 </template>
 
 <script>
-
     export default {
-        components: {}
+        components: {},
+        methods: {
+            addThemeLink() {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.id = 'admin-theme';
+                link.href = 'assets/themes/white-dark.css';
+                document.head.appendChild(link);
+            }
+        },
+        mounted() {
+//            this.$Notification.success({
+//                title: 'Welcome to Vary-Admin!',
+//                message: 'Welcome to Vary-Admin!'
+//            });
+            this.addThemeLink();
+        }
     }
 </script>
 
 <style lang="less">
-    @import "./styles/index.less";
     html, body {
         width: 100%;
         height: 100%;
@@ -21,6 +33,11 @@
     }
 
     body {
+        font: 13px Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+        line-height: 1.5;
+        color: #303548;
+        background: #f5f5f5;
+
         &::-webkit-scrollbar {
             height: 6px;
             width: 6px;
@@ -37,7 +54,7 @@
         }
     }
 
-    .v-main {
-        height: 100%;
-    }
+    @import "base/vary-ui/styles/base";
+    @import "base/vary-ui/styles/index";
+    @import "base/styles/widget/index";
 </style>

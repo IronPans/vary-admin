@@ -1,0 +1,88 @@
+.va-alert {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+
+  .va-alert-title {
+    font-size: 14px;
+    display: block;
+    color: rgba(0,0,0,.85);
+  }
+
+  .va-alert-desc {
+    display: block;
+    font-size: 12px;
+    color: rgba(0,0,0,.65);
+    text-align: justify;
+  }
+
+  .va-alert-icon {
+    font-size: 14px;
+    padding-right: 10px;
+  }
+
+  .va-alert-with-desc {
+    padding: 16px;
+  }
+
+  &.va-alert-with-close {
+    padding-right: 48px;
+  }
+
+  .va-alert-close {
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    overflow: hidden;
+    cursor: pointer;
+
+    .va-icon {
+      font-size: 12px;
+    }
+  }
+
+  &.va-alert-with-icon.va-alert-with-desc {
+    .va-alert-icon {
+      font-size: 28px;
+      padding-right: 16px;
+    }
+  }
+
+  &.va-alert-success {
+    border: 1px solid #d1f2e1;
+    background-color: #e8f9f0;
+
+    .va-alert-icon {
+      color: #19be6b
+    }
+  }
+
+  &.va-alert-info {
+    border: 1px solid #d5e8fc;
+    background-color: #eaf4fe;
+
+    .va-alert-icon {
+      color: #2d8cf0
+    }
+  }
+
+  &.va-alert-warning {
+    border: 1px solid #ffebcc;
+    background-color: #fff5e6;
+
+    .va-alert-icon {
+      color: #f90
+    }
+  }
+
+  &.va-alert-error {
+    border: 1px solid #fbd9d0;
+    background-color: #fdece8;
+
+    .va-alert-icon {
+      color: #ed3f14
+    }
+  }
+}

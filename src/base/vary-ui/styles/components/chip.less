@@ -1,0 +1,108 @@
+
+.va-chip {
+  position: relative;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+  font-size: 13px;
+  line-height: 16px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.87);
+  background: rgba(0, 0, 0, .12);
+  transition: all .4s cubic-bezier(.25, .8, .25, 1);
+
+  .va-chip-inner {
+    box-sizing: border-box;
+    padding: 5px 10px;
+  }
+
+  .va-chip-avatar {
+    padding: 3px;
+
+    .va-avatar {
+      display: flex;
+      width: 26px;
+      height: 26px;
+      box-sizing: border-box;
+      overflow: hidden;
+
+      img {
+        display: block;
+        border-radius: 50%;
+        color: #616161;
+        font-size: 20px;
+      }
+    }
+
+    .va-icon {
+      display: block;
+    }
+
+    + .va-chip-inner {
+      padding: 5px 10px 5px 5px;
+    }
+  }
+
+  .va-chip-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.1);
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+    &:hover,
+    &:active {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &.va-chip-active:not(.bm-disabled),
+  &:active:not(.bm-disabled),
+  &:focus:not(.bm-disabled) {
+    cursor: pointer;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
+  }
+}
+
+.va-chip-group {
+  position: relative;
+
+  input {
+    background: none;
+    border: none;
+    height: 32px;
+  }
+
+  &.va-chip-input:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(0, 0, 0, .12);
+    -webkit-transition: all .4s cubic-bezier(.25, .8, .25, 1);
+    transition: all .4s cubic-bezier(.25, .8, .25, 1);
+  }
+
+  &.va-chip-input.va-chip-focus:after {
+    //background: $primary;
+    height: 2px;
+  }
+
+  &.va-chip-input .va-chip {
+    margin-right: 8px;
+    margin-bottom: 5px;
+  }
+}
+

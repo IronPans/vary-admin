@@ -1,0 +1,308 @@
+
+.va-date-picker {
+  position: relative;
+  display: inline-block;
+  line-height: 30px;
+
+  &.va-date-picker-inline {
+    position: relative;
+
+    .va-date-picker-wrapper {
+      position: relative;
+    }
+
+    .date-picker {
+      position: relative;
+      top: 0;
+    }
+  }
+
+  .va-date-picker-header {
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  tr td,
+  tr th {
+    width: 14.8%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .va-date-picker-year,
+  .va-date-picker-month {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    height: calc(100% - 40px);
+    background: #fff;
+
+    table {
+      width: 100%;
+      height: 100%;
+      table-layout: fixed;
+
+      tr td {
+        height: 25%;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+          background: #eee;
+        }
+
+        &.free-date-active {
+          color: #fff;
+          border-radius: 3px;
+          background-color: #115d8e;
+
+          span {
+            color: #fff;
+            background-color: #115d8e;
+          }
+        }
+      }
+    }
+  }
+
+  .va-date-picker-year {
+    table {
+      tr:first-child td:first-child,
+      tr:last-child td:last-child {
+        color: #999;
+
+        &:hover {
+          background: transparent;
+        }
+      }
+    }
+  }
+
+  .va-select-input {
+    position: relative;
+    border-radius: 2px;
+    width: 150px;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+
+    input {
+      width: 100%;
+      height: 100%;
+      padding: 0 30px 0 5px;
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+
+      &:disabled {
+        cursor: pointer;
+      }
+    }
+
+    label {
+      display: flex;
+      position: relative;
+      width: calc(100% - 25px);
+      height: 100%;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      background: transparent;
+      align-items: center;
+    }
+  }
+
+  .va-date-picker-wrapper {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    z-index: 1;
+    padding: 0 5px 5px;
+    box-sizing: border-box;
+    min-width: 100%;
+    background: #fff;
+    border-radius: 4px;
+    transform-origin: left top;
+    box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
+
+    .va-date-picker-time {
+      display: flex;
+      align-items: center;
+      flex: 1 0 auto;
+
+      .va-date-picker-time-wrapper {
+        display: flex;
+        align-items: center;
+        margin-left: 5px;
+        height: 28px;
+        border: 1px solid #d9d9d9;
+        border-radius: 3px;
+      }
+
+      span {
+        margin-right: 5px;
+        input {
+          width: 24px;
+          padding: 0 4px;
+          font-size: 12px;
+          height: 100%;
+          border: none;
+        }
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none !important;
+        margin: 0;
+      }
+
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    }
+
+    .va-date-picker-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 36px;
+      margin-top: 5px;
+      padding-top: 5px;
+      border-top: 1px solid #d9d9d9;
+      box-sizing: border-box;
+
+      span {
+        cursor: pointer;
+      }
+    }
+
+    table tr th {
+      font-weight: 500;
+    }
+
+    .date-picker-header {
+      flex-wrap: nowrap;
+      border-bottom: 1px solid #d9d9d9;
+    }
+
+    .date-picker-body .item,
+    .date-picker-header .item {
+      text-align: center;
+    }
+
+    .date-picker-body {
+      background: #fff;
+      padding: 5px 0;
+
+      .pass,
+      .future {
+        color: #999 !important;
+        cursor: auto;
+      }
+
+      .item {
+        color: #333;
+        box-sizing: border-box;
+        transition: all .25s;
+        user-select: none;
+        font-size: .9em;
+
+        &.today {
+          background-color: #eee;
+        }
+
+        &.selected {
+          color: #fff;
+          background-color: #115d8e;
+        }
+
+        &:not(.pass):not(.future) {
+          cursor: pointer;
+        }
+
+        &:not(.pass):not(.future):not(.selected):hover {
+          background: #eee;
+        }
+      }
+    }
+
+    .va-date-picker-header {
+      position: relative;
+      padding: 4px 5px;
+      height: 40px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .date-picker-week {
+        width: 100%;
+      }
+
+      .date-picker-select {
+        display: flex;
+        flex-wrap: wrap;
+
+        .date-picker-select-prev,
+        .date-picker-select-next {
+          display: inline-flex;
+          width: 20px;
+          height: 20px;
+          font-size: 20px;
+          text-align: center;
+          cursor: pointer;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+
+          &:hover {
+            background: #eee;
+          }
+        }
+      }
+
+      .date-picker-today {
+        font-size: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .va-date-picker-time {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    box-sizing: border-box;
+
+    .va-time-selector {
+      width: 22px;
+      margin: 0 5px;
+      display: flex;
+      font-size: 13px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .va-time-selector-wrapper {
+        line-height: 22px;
+      }
+
+      & > span {
+        margin: 0;
+      }
+
+      span:first-child,
+      span:last-child {
+        padding: 0 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}

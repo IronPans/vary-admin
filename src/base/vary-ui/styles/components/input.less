@@ -1,0 +1,222 @@
+@defaultColor: #303548;
+
+.va-input {
+  display: inline-flex;
+  flex-direction: column;
+  font-size: 14px;
+
+  &.va-input-block {
+    display: flex;
+  }
+
+  .va-input-wrapper {
+    position: relative;
+    display: flex;
+  }
+
+  .va-input-label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    color: rgba(0,0,0,.3);
+    transform: translate(0, -50%);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  &.va-input-noEmpty {
+    .va-input-label {
+      opacity: 0;
+    }
+  }
+
+  &.va-input-animated {
+    .va-input-field {
+      margin-top: 16px;
+    }
+
+    .va-input-label {
+      padding: 0;
+      line-height: 1;
+      margin: 0;
+      transform-origin: top left;
+      transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    }
+
+    &.va-input-focus,
+    &.va-input-noEmpty {
+      .va-input-label {
+        color: @defaultColor;
+        transform: translate(0, -30px) scale(0.75);
+      }
+    }
+  }
+
+  > label {
+    margin: 0 0 10px 0;
+  }
+
+  &.va-input-inline {
+    flex-direction: row;
+    align-items: center;
+
+    > label {
+      margin: 0 10px 0 0;
+    }
+  }
+
+  .va-input-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:first-child {
+      width: 100%;
+      flex: 1;
+    }
+
+    .va-input-icon {
+      position: absolute;
+      top: 0;
+      width: 40px;
+      height: 100%;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0,0,0,.18);
+
+      &.va-input-icon-left {
+        left: 0;
+        + input {
+          padding-left: 40px;
+        }
+      }
+
+      &.va-input-icon-right,
+      &.va-input-clear {
+        right: 0;
+        + input {
+          padding-right: 40px;
+        }
+      }
+
+      &.va-input-clear {
+        > i {
+          font-size: 14px;
+          width: auto;
+          height: auto;
+          padding: 3px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          background: #666;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  input,
+  textarea {
+    font: inherit;
+    border: none;
+    border-radius: 4px;
+    margin: 0;
+    padding: 5px;
+    outline: none;
+    display: block;
+    min-width: 0;
+    flex: 1 0 auto;
+    width: 1%;
+    min-height: 32px;
+    color: currentColor;
+    box-sizing: border-box;
+    background: none;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+
+    &::placeholder {
+      color: rgba(0,0,0,.3);
+      opacity: 1;
+    }
+
+    &:disabled {
+      background-color: #e9ecef;
+    }
+  }
+
+  .va-input-startSlot,
+  .va-input-endSlot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    color: #666;
+    background: #d9d9d9;
+
+    .va-icon {
+      font-size: 18px;
+    }
+  }
+
+  hr {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #e9edf2;
+    border: 0;
+    content: "";
+    display: block;
+    height: 1px;
+    margin: 0;
+    transition: all .3s;
+
+    &:after {
+      background: #007bff;
+      content: "";
+      display: block;
+      height: 2px;
+      transition-duration: .25s;
+      transition-property: width;
+      width: 0;
+      margin: auto;
+    }
+  }
+
+  &.va-input-border {
+
+    .va-input-inner {
+      border: 1px solid #e9edf2;
+      border-radius: 4px;
+
+      &:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      &:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    &.va-input-focus {
+      .va-input-inner {
+        border-color: #007bff;
+      }
+    }
+  }
+
+  &.va-input-focus {
+    hr {
+      &:after {
+        width: 100%;
+      }
+    }
+  }
+}

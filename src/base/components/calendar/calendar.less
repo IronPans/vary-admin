@@ -1,0 +1,164 @@
+@import "../../vary-ui/styles/mixin/color";
+@borderColor: #eef1f2;
+
+.va-calendar {
+
+  .va-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    .va-calendar-header-center {
+      font-size: 20px;
+    }
+
+    .va-calendar-header-left {
+      .va-button {
+        min-height: 30px;
+        height: 30px;
+        padding: 0 8px;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  .table {
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid @borderColor;
+    border-left: 1px solid @borderColor;
+
+    .va-day-header,
+    .va-day {
+      width: 14.8%;
+      box-sizing: border-box;
+      border-right: 1px solid @borderColor;
+      border-bottom: 1px solid @borderColor;
+    }
+
+    .va-day {
+      &.hover {
+        background: #eee;
+      }
+    }
+
+    .va-day-header {
+      padding: 8px 0;
+    }
+
+    .va-day-top {
+      width: 14.8%;
+      box-sizing: border-box;
+
+      > span {
+        display: flex;
+        padding: 10px;
+        box-sizing: border-box;
+
+        &.pass,
+        &.future {
+          color: #999;
+        }
+      }
+    }
+
+    .va-calendar-week {
+      position: relative;
+      height: 80px;
+    }
+
+    .va-calendar-bg,
+    .va-calendar-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+
+    .va-calendar-bg,
+    .va-day {
+      height: 100%;
+    }
+
+    .va-calendar-bg {
+      table {
+        height: 100%
+      }
+    }
+
+    .va-calendar-content {
+      z-index: 4;
+    }
+  }
+
+  .calendar-events {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    border: 1px solid #fff;
+    cursor: move;
+
+    > .va-badge {
+      margin-right: 10px;
+    }
+
+    &:hover {
+      border: 1px dashed rgba(120, 130, 140, 0.13);
+    }
+  }
+
+  .va-event-container {
+    > a {
+      display: block;
+      max-width: 100%;
+      background: #007bff;
+      .color(va-event);
+    }
+
+    .va-event-content {
+      font-size: 11px;
+      padding: 5px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      overflow: hidden;
+      color: #fff;
+    }
+  }
+
+  .va-draggable-item {
+    position: fixed;
+    z-index: 101;
+  }
+}
+
+.event-tag {
+  > span {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 3px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    &.selected:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 5px;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+}

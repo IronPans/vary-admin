@@ -2,12 +2,11 @@ const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common');
 const helpers = require('./helpers');
 const webpack = require('webpack');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const ENV = process.env.ENV = process.env.NODE_ENV = 'production';
 
@@ -21,63 +20,50 @@ module.exports = (env) => {
             sourceMapFilename: '[file].map',
             chunkFilename: '[id].[chunkhash].chunk.js'
         },
-        module: {
-            rules: [
-                {
-                    test: /\.(less|css)$/,
-                    loader: ExtractTextPlugin.extract({
-                        fallback: {
-                            loader: require.resolve('style-loader'),
-                            options: {
-                                hmr: false,
-                            },
-                        },
-                        use: [
-                            {
-                                loader: require.resolve('css-loader'),
-                                options: {
-                                    importLoaders: 1,
-                                },
-                            },
-                            {
-                                loader: require.resolve('postcss-loader'),
-                                options: {
-                                    ident: 'postcss',
-                                    plugins: () => [
-                                        autoprefixer({
-                                            browsers: [
-                                                'last 2 versions',
-                                                'Firefox ESR',
-                                                '> 1%',
-                                                'ie >= 9',
-                                                'iOS >= 8',
-                                                'Android >= 4'
-                                            ]
-                                        }),
-                                        cssnano({
-                                            preset: 'default',
-                                            zindex: false
-                                        }),
-                                    ],
-                                },
-                            },
-                            {
-                                loader: 'less-loader'
-                            }
-                        ]
-                    })
+        optimization: {
+            runtimeChunk: {
+                name: 'manifest'
+            },
+            //minimize: true,
+            minimizer: [
+                new UglifyJsPlugin({
+                    cache: true,
+                    parallel: true,
+                    sourceMap: true
+                }),
+                new OptimizeCSSAssetsPlugin({})
+            ],
+            splitChunks: {
+                chunks: 'async',
+                minSize: 30000,
+                minChunks: 1,
+                maxAsyncRequests: 5,
+                maxInitialRequests: 3,
+                name: false,
+                cacheGroups: {
+                    vendor: {
+                        name: 'vendor',
+                        chunks: 'initial',
+                        priority: -10,
+                        reuseExistingChunk: false,
+                        test: /node_modules\/(.*)\.js/
+                    },
+                    styles: {
+                        name: 'styles',
+                        test: /\.(less|css)$/,
+                        chunks: 'all',
+                        minChunks: 1,
+                        reuseExistingChunk: true,
+                        enforce: true
+                    }
                 }
-            ]
+            }
         },
         plugins: [
-            new webpack.optimize.CommonsChunkPlugin({
-                name: ['vender'],
-                minChunks: Infinity
-            }),
-            new ExtractTextPlugin({
-                filename: "[name].[hash].css",
-                allChunks: true
-            }),
+            // new webpack.optimize.CommonsChunkPlugin({
+            //     name: ['base', 'extend'],
+            //     minChunks: Infinity
+            // }),
             new webpack.DefinePlugin({
                 'process.env': {
                     NODE_ENV: '"production"'
@@ -97,18 +83,19 @@ module.exports = (env) => {
                 minRatio: 0.8
             }),
             new webpack.optimize.ModuleConcatenationPlugin(),
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false,
-                    drop_console: true,
-                    collapse_vars: true,
-                    reduce_vars: true,
-                },
-                output: {
-                    beautify: false,
-                    comments: false,
-                }
-            }),
+            /**
+             * Plugin: CopyWebpackPlugin
+             * Description: Copy files and directories in webpack.
+             *
+             * Copies project static assets.
+             *
+             * See: https://www.npmjs.com/package/copy-webpack-plugin
+             */
+            new CopyWebpackPlugin([{
+                    from: 'src/assets',
+                    to: 'assets'
+                }]
+            )
         ]
     });
 }
