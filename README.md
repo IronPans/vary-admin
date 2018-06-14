@@ -105,3 +105,10 @@ Vary Admin是基于Vue.js，搭配内置的vary-ui组件库组成的一套后台
 
 
 
+
+**终极目标**
+
+展示图：
+![](http://p7z185mbi.bkt.clouddn.com/vary_admin.png)
+
+
