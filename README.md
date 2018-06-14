@@ -4,12 +4,12 @@ Vue 2.0 admin system.
 
 [HomePage](https://varyui.github.io)
 
-##简介
+## 简介
 
 Vary Admin是基于Vue.js，搭配内置的vary-ui组件库组成的一套后台管理系统。
 
 
-##功能
+## 功能
 
 * 多样化面板
 * 基础
@@ -59,7 +59,7 @@ Vary Admin是基于Vue.js，搭配内置的vary-ui组件库组成的一套后台
 * 多级菜单
 * 换肤
   
-##文件结构
+## 文件结构
 
 ```javascript
 
@@ -104,11 +104,5 @@ Vary Admin是基于Vue.js，搭配内置的vary-ui组件库组成的一套后台
 
 
 
-
-
-**终极目标**
-
-展示图：
-![](http://p7z185mbi.bkt.clouddn.com/vary_admin.png)
 
 
