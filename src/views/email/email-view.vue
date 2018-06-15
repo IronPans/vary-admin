@@ -79,21 +79,28 @@
                         </div>
                     </va-col>
                     <va-col :md="9" class="mail-body">
-                        <div class="mail-body-header">
-                            <va-button theme="primary" size="sm">
-                                <va-icon icon="error"></va-icon>
-                            </va-button>
-                            <va-button theme="info" size="sm">
-                                <va-icon icon="move_to_inbox"></va-icon>
-                            </va-button>
-                            <va-button theme="danger" size="sm">
-                                <va-icon icon="delete"></va-icon>
-                            </va-button>
-                            <va-button theme="success" shape="circle" size="sm">
-                                <va-icon icon="autorenew"></va-icon>
-                            </va-button>
+                        <div class="p-l-20 p-r-20">
+                            <h4 class="border-bottom p-b-10">Your message title goes here</h4>
+                            <div class="mail-detail">
+                                <va-list>
+                                    <va-list-item>
+                                        <va-avatar src="assets/images/avatar/1.jpg"></va-avatar>
+                                        <va-list-item-text>
+                                            Tome
+                                            <div class="text-muted">From: jonathan@domain.com</div>
+                                        </va-list-item-text>
+                                    </va-list-item>
+                                </va-list>
+                                <div class="mail-detail-content">
+                                    <p><b>Dear USer</b></p>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p>
+                                    <p>enean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar,</p>
+                                </div>
+                            </div>
+                            <div class="mail-detail-footer">
+                                <va-button theme="primary">reply</va-button>
+                            </div>
                         </div>
-                        <va-table :pagination="true" selection-mode="multiple" :hover="true" :columns="columns" :data="data"></va-table>
                     </va-col>
                 </va-row>
             </div>
@@ -102,8 +109,10 @@
 </template>
 
 <script>
+    const prefixCls = 'va-email-view';
+
     export default {
-        name: "va-email",
+        name: 'va-email-view',
         data() {
             return {
                 columns: [
@@ -125,19 +134,12 @@
                         header: 'First name'
                     },
                     {
-                        field: 'deadline',
-                        header: 'Deadline'
+                        field: 'amount',
+                        header: 'Amount'
                     },
                     {
-                        field: 'amount',
-                        header: 'Amount',
-                        render(h, params) {
-                            return h('va-button', {
-                                props: {
-                                    'link-to': 'email_view'
-                                }
-                            }, 'view')
-                        }
+                        field: 'deadline',
+                        header: 'Deadline'
                     }
                 ],
                 data: [

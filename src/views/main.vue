@@ -15,6 +15,7 @@
                             <template slot="header">
                                 <va-icon :icon="citem.icon"></va-icon>
                                 <span>{{citem.name}}</span>
+                                <va-badge v-if="citem.count" :count="citem.count" :fixed="false"></va-badge>
                             </template>
                             <template slot="content">
                                 <va-list>

@@ -62,6 +62,7 @@ const MENUS = [
             {
                 name: 'UI Elements',
                 icon: 'view_module',
+                count: 10,
                 children: [
                     {
                         name: 'Alert',

@@ -107,6 +107,15 @@ export const mainRouter = [
                 component: () => import('@/views/email/email-compose.vue')
             },
             {
+                path: 'email_view',
+                name: 'email_view',
+                meta: {
+                    title: 'Email View',
+                    nav: 'Email View'
+                },
+                component: () => import('@/views/email/email-view.vue')
+            },
+            {
                 path: 'timeline',
                 name: 'timeline',
                 meta: {
