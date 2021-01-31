@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "async-validator": "^1.8.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "chart.js": "^2.7.2",
     "enquire.js": "^2.1.6",
     "fullcalendar": "^3.9.0",
