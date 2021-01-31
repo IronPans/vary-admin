@@ -4,7 +4,7 @@ const helpers = require('./helpers');
 const webpack = require('webpack');
 
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
-const HOST = process.env.HOST || '172.17.0.1';
+const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || 4200;
 
 const METADATA = webpackMerge(commonConfig({
