@@ -23,7 +23,7 @@
   "dependencies": {
     "async-validator": "^1.8.2",
     "axios": "^0.18.0",
-    "chart.js": "^2.7.2",
+    "chart.js": "^2.9.4",
     "enquire.js": "^2.1.6",
     "fullcalendar": "^3.9.0",
     "jquery": "^3.3.1",
