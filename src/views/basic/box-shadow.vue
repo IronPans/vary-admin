@@ -12,13 +12,13 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 
-    const prefixCls = 'va-box-shadow';
+    // const prefixCls = 'va-box-shadow';
 
-    export default {
-        name: 'va-box-shadow'
-    }
+    // export default {
+    //     name: 'va-box-shadow'
+    // }
 </script>
 
 <style lang="less" scoped>

@@ -1,103 +1,121 @@
 <template>
-    <div :class="classes">
-        <va-chip v-for="(node, index) in chipData" :data="node" :key="index.toString()"
-                 @on-delete="handleDelete(node)" @click="handleClick(node)"></va-chip>
-        <input v-if="placeholder" v-model="value" :spellCheck="false" type="text"
-        placeholder="placeholder" @keyup.enter="handleKeyUp"
-        @change="handleChange" @focus="handleFocus"/>
-    </div>
+  <div :class="classes">
+    <va-chip
+      v-for="(node, index) in chipData"
+      :data="node"
+      :key="index.toString()"
+      @on-delete="handleDelete(node)"
+      @click="handleClick(node)"
+    ></va-chip>
+    <input
+      v-if="placeholder"
+      v-model="value"
+      :spellCheck="false"
+      type="text"
+      placeholder="placeholder"
+      @keyup.enter="handleKeyUp"
+      @change="handleChange"
+      @focus="handleFocus"
+    />
+  </div>
 </template>
 
-<script>
-    import vaChip from './chip';
+<script lang="ts">
+import { defineComponent, computed, ref } from "vue";
+import vaChip from "./chip.vue";
 
-    const prefixCls = 'va-chip';
+const prefixCls = "va-chip";
 
-    export default {
-        name: "va-chip-group",
-        components: {
-            vaChip
-        },
-        props: {
-            data: {
-                type: Array,
-                default() {
-                    return []
-                }
-            },
-            placeholder: {
-                type: String
-            }
-        },
-        data() {
-            return {
-                focus: false,
-                chipData: [...this.data],
-                value: ''
-            }
-        },
-        computed: {
-            classes() {
-                return [
-                    `${prefixCls}-group`,
-                    {
-                        [`${prefixCls}-input`]: this.placeholder,
-                        [`${prefixCls}-focus`]: this.focus
-                    }
-                ]
-            }
-        },
-        methods: {
-            handleDelete(data) {
-                const chipData = [...this.chipData];
-                const chipToDelete = chipData.indexOf(data);
-                chipData.splice(chipToDelete, 1);
-                this.chipData = chipData;
-                this.$emit('on-delete', {
-                    label: data.label,
-                    value: data.value
-                });
-            },
+export default defineComponent({
+  name: "va-chip-group",
+  components: {
+    vaChip,
+  },
+  props: {
+    data: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+    placeholder: {
+      type: String,
+    },
+  },
+  emits: ["on-delete", "click"],
+  setup(props, { emit }) {
+    const focus = ref(false);
+    const value = ref("");
+    const chipData = ref([]);
 
-            handleClick(data) {
-                this.$emit('click', {
-                    label: data.label,
-                    value: data.value
-                });
-            },
-
-            handleFocus() {
-                this.focus = true;
-            },
-
-            handleChange(event) {
-                this.value = event.target.value;
-            },
-
-            handleKeyUp(event) {
-                let value = event.target.value;
-                const data = [...this.chipData];
-                let isExited = false;
-                for (const d of data) {
-                    if (d.label === value) {
-                        isExited = true;
-                        break;
-                    }
-                }
-                if (!isExited) {
-                    data.push({
-                        label: value,
-                        value: value
-                    });
-                    value = '';
-                    this.chipData = data;
-                    this.value = '';
-                }
-            }
-        }
+    function handleDelete(data) {
+      const cData = [...chipData.value];
+      const chipToDelete = cData.indexOf(data);
+      cData.splice(chipToDelete, 1);
+      chipData.value = cData;
+      emit("on-delete", {
+        label: data.label,
+        value: data.value,
+      });
     }
+
+    function handleClick(data) {
+      emit("click", {
+        label: data.label,
+        value: data.value,
+      });
+    }
+
+    function handleFocus() {
+      focus.value = true;
+    }
+
+    function handleChange(event) {
+      value.value = event.target.value;
+    }
+
+    function handleKeyUp(event) {
+      let value = event.target.value;
+      const data = [...chipData.value];
+      let isExited = false;
+      for (const d of data) {
+        if (d.label === value) {
+          isExited = true;
+          break;
+        }
+      }
+      if (!isExited) {
+        data.push({
+          label: value,
+          value: value,
+        });
+        value = "";
+        chipData.value = data;
+        value.value = "";
+      }
+    }
+    return {
+      focus,
+      chipData,
+      placeholder: props.placeholder,
+      value,
+      handleDelete,
+      handleClick,
+      handleFocus,
+      handleChange,
+      handleKeyUp,
+      classes: computed(() => {
+        return [
+          `${prefixCls}-group`,
+          {
+            [`${prefixCls}-input`]: props.placeholder,
+            [`${prefixCls}-focus`]: focus.value,
+          },
+        ];
+      }),
+    };
+  },
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

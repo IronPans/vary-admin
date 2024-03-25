@@ -1,111 +1,106 @@
 <template>
-    <div :class="classes">
-        <canvas :width="width" :height="height" ref="canvas" @click="onCanvasClick"/>
-    </div>
+  <div :class="prefixCls">
+    <canvas :width="width" :height="height" ref="canvas" @click="onCanvasClick" />
+  </div>
 </template>
 
-<script>
-    import Chart from 'chart.js';
+<script lang="ts">
+import { defineComponent, computed, onMounted, onUnmounted, ref, watch } from "vue";
+import Chart from "chart.js/auto";
 
-    const prefixCls = 'va-chart';
+const prefixCls = "va-chart";
 
-    export default {
-        name: "chart",
-        props: {
-            data: {
-                type: Object
-            },
-            width: {
-                type: Number
-            },
-            height: {
-                type: Number
-            },
-            type: {
-                type: String
-            },
-            options: {
-                type: Object
-            }
-        },
-        data() {
-            return {
-                canvas: '',
-                chart: ''
-            }
-        },
-        computed: {
-          classes() {
-              return [
-                  `${prefixCls}`
-              ]
-          }
-        },
-        methods: {
-            initChart() {
-                this.chart = new Chart(this.canvas, {
-                    type: this.type,
-                    data: this.data,
-                    options: this.options
-                });
-            },
-
-            getCanvas() {
-                return this.canvas;
-            },
-
-            getBase64Image() {
-                return this.chart.toBase64Image();
-            },
-
-            generateLegend() {
-                if (this.chart) {
-                    this.chart.generateLegend();
-                }
-            },
-
-            reInit() {
-                if (this.chart) {
-                    this.chart.destroy();
-                    this.initChart();
-                }
-            },
-
-            refresh() {
-                if (this.chart) {
-                    this.chart.update();
-                }
-            },
-
-            onCanvasClick(event) {
-                if (this.chart) {
-                    const element = this.chart.getElementAtEvent(event);
-                    const dataset = this.chart.getDatasetAtEvent(event);
-                    if (element && element[0] && dataset) {
-                        //this.$emit({originalEvent: event, element: element[0], dataset: dataset});
-                    }
-                }
-            }
-        },
-        watch: {
-            data(val) {
-                this.data = val;
-                this.reInit();
-            }
-        },
-        mounted() {
-            this.canvas = this.$refs.canvas;
-            this.initChart();
-        },
-        destroyed() {
-            if (this.chart) {
-                this.chart.destroy();
-                this.chart = null;
-            }
-        }
+export default defineComponent({
+  name: "chart",
+  props: {
+    data: {
+      type: Object,
+    },
+    width: {
+      type: Number,
+    },
+    height: {
+      type: Number,
+    },
+    type: {
+      type: String,
+    },
+    options: {
+      type: Object,
+    },
+  },
+  setup(props) {
+    let chart = null;
+    const canvas = ref();
+    function initChart() {
+      chart = new Chart(canvas.value, {
+        type: props.type,
+        data: props.data,
+        options: props.options,
+      });
     }
+
+    function getCanvas() {
+      return canvas.value;
+    }
+
+    function getBase64Image() {
+      return chart.toBase64Image();
+    }
+
+    function generateLegend() {
+      if (chart) {
+        chart.generateLegend();
+      }
+    }
+
+    function reInit() {
+      if (chart) {
+        chart.destroy();
+        initChart();
+      }
+    }
+
+    function refresh() {
+      if (chart) {
+        chart.update();
+      }
+    }
+
+    function onCanvasClick(event) {
+      if (chart) {
+        const element = chart.getElementAtEvent(event);
+        const dataset = chart.getDatasetAtEvent(event);
+        if (element && element[0] && dataset) {
+          //this.$emit({originalEvent: event, element: element[0], dataset: dataset});
+        }
+      }
+    }
+
+    onMounted(() => {
+      initChart();
+    });
+
+    onUnmounted(() => {
+      if (chart) {
+        chart.destroy();
+        chart = null;
+      }
+    });
+
+    watch(props.data, (val) => {
+      reInit();
+    });
+
+    return {
+      canvas,
+      onCanvasClick,
+      prefixCls,
+      width: props.width,
+      height: props.height,
+    };
+  },
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

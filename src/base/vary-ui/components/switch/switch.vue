@@ -1,73 +1,79 @@
 <template>
-    <label :class="classes">
-        <input type="checkbox" :disabled="disabled" :checked="shouldBeChecked"
-               @change="handleInputChange"/>
-        <div :class="`${prefixCls}-media`">
-            <span :class="`${prefixCls}-label`"></span>
-        </div>
-        <div :class="`${prefixCls}-inner`"><slot>{{label}}</slot></div>
-    </label>
+  <label :class="classes">
+    <input
+      type="checkbox"
+      :disabled="disabled"
+      :checked="checked"
+      @change="handleInputChange"
+    />
+    <div :class="`${prefixCls}-media`">
+      <span :class="`${prefixCls}-label`"></span>
+    </div>
+    <div :class="`${prefixCls}-inner`">
+      <slot>{{ label }}</slot>
+    </div>
+  </label>
 </template>
 
-<script>
-    const prefixCls = 'va-switch';
+<script lang="ts">
+import { defineComponent, computed, ref } from "vue";
+const prefixCls = "va-switch";
 
-    export default {
-        name: "va-switch",
-        props: {
-            value: {
-                default: false
-            },
-            inputValue: {
-                type: [String, Number, Boolean]
-            },
-            disabled: {
-                type: Boolean
-            },
-            trueValue: {
-                type: [String, Number, Boolean],
-                default: true
-            },
-            falseValue: {
-                type: [String, Number, Boolean],
-                default: false
-            },
-            type: {
-                type: Number,
-                default: 2
-            },
-            label: {
-                type: String
-            }
-        },
-        data() {
-            return {
-                prefixCls
-            }
-        },
-        computed: {
-            classes() {
-                return [
-                    prefixCls,
-                    {
-                        [`${prefixCls}-disabled`]: this.disabled,
-                        [`${prefixCls}-${this.type}`]: this.type
-                    }
-                ]
-            },
-            shouldBeChecked() {
-                return this.value === this.trueValue;
-            }
-        },
-        methods: {
-            handleInputChange(event) {
-                const {checked} = event.target;
-                let newValue = false;
-                newValue = checked ? this.trueValue : this.falseValue;
-                this.$emit('input', newValue);
+export default defineComponent({
+  name: "va-switch",
+  props: {
+    modelValue: {
+      default: false,
+    },
+    inputValue: {
+      type: [String, Number, Boolean],
+    },
+    disabled: {
+      type: Boolean,
+    },
+    trueValue: {
+      type: [String, Number, Boolean],
+      default: true,
+    },
+    falseValue: {
+      type: [String, Number, Boolean],
+      default: false,
+    },
+    type: {
+      type: Number,
+      default: 2,
+    },
+    label: {
+      type: String,
+    },
+  },
+  emits: ["update:modelValue", "on-change"],
+  setup(props, { emit }) {
+    const checked = ref(props.modelValue);
+    function handleInputChange(event) {
+      checked.value = event.target.checked;
+      const newValue = checked.value ? props.trueValue : props.falseValue;
+      emit("update:modelValue", newValue);
 
-                this.$emit('on-change', newValue);
-            }
-        }
+      emit("on-change", {
+        checked,
+        value: newValue,
+      });
     }
+    return {
+      prefixCls,
+      handleInputChange,
+      checked,
+      classes: computed(() => {
+        return [
+          prefixCls,
+          {
+            [`${prefixCls}-disabled`]: props.disabled,
+            [`${prefixCls}-${props.type}`]: props.type,
+          },
+        ];
+      }),
+    };
+  },
+});
 </script>

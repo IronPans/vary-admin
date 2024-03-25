@@ -1,13 +1,15 @@
-
 .va-tabs {
   display: flex;
   flex-direction: column;
 
   .va-tabs-nav {
-    border-bottom: 1px solid #e8e8e8;
+    // border-bottom: 1px solid #e8e8e8;
     margin-bottom: 16px;
     display: flex;
     overflow: hidden;
+    background: rgb(241, 245, 249);
+    padding: 0.25rem;
+    border-radius: 0.5rem;
 
     .va-tabs-nav-wrapper {
       position: relative;
@@ -16,6 +18,11 @@
       .va-tabs-tab {
         padding: 6px 24px;
         cursor: pointer;
+
+        &.va-tabs-tab-active {
+          background-color: #fff;
+          border-radius: 0.5rem;
+        }
       }
     }
 
@@ -46,4 +53,3 @@
     }
   }
 }
-

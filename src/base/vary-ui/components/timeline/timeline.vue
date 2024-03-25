@@ -1,21 +1,18 @@
 <template>
-    <div :class="classes">
-        <slot></slot>
-    </div>
+  <div :class="prefixCls">
+    <slot></slot>
+  </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 
-    const prefixCls = 'va-timeline';
+const prefixCls = "va-timeline";
 
-    export default {
-        name: 'VaTimeline',
-        computed: {
-            classes() {
-                return [
-                    prefixCls
-                ];
-            }
-        }
-    }
+export default defineComponent({
+  name: "VaTimeline",
+  setup() {
+    return { prefixCls };
+  },
+});
 </script>

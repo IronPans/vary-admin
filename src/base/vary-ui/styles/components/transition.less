@@ -1,90 +1,105 @@
 /**
- va-enter 定义进入过渡的开始状态
+ va-enter-from 定义进入过渡的开始状态
  va-enter-active  定义进入过渡生效时的状态
  va-enter-to 定义进入过渡的结束状态
- va-leave  定义离开过渡的开始状态
+ va-leave-from  定义离开过渡的开始状态
  va-leave-active 定义离开过渡生效时的状态
  va-leave-to 定义离开过渡的结束状态
  */
 
-.scaleInTop-enter-active,
-.scaleInTop-leave-active,
-.moveInUp-enter-active,
-.moveInUp-leave-active,
-.moveInDown-enter-active,
-.moveInDown-leave-active {
-  transition: transform .3s ease,opacity .3s ease;
-}
-
-.scaleInTop-enter, .scaleInTop-leave-to {
+.scaleInTop-leave-to,
+.scaleInTop-enter-from {
   opacity: 0;
   transform: scale(0);
 }
 
-.moveInDown-enter,
+.scaleInTop-enter-active,
+.scaleInTop-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.moveInUp-leave-to,
+.moveInUp-enter-from {
+  opacity: 0;
+  transform: translate(0, 100%);
+}
+
+.moveInUp-enter-active,
+.moveInUp-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.moveInDown-enter-active,
+.moveInDown-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.moveInDown-enter-from,
 .moveInDown-leave-to {
   opacity: 0;
   transform: translate3d(0, -100%, 0);
 }
 
-.moveInUp-enter,
-.moveInUp-leave-to {
-  opacity: 0;
-  transform: translate(0, 100%);
-}
-
 .moveInLeft-enter-active,
 .moveInLeft-leave-active {
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
-.moveInLeft-enter,
-.moveInLeft-leave-to{
+.moveInLeft-enter-from,
+.moveInLeft-leave-to {
   transform: translate3d(-100%, 0, 0);
 }
 
 .moveInRight-enter-active,
 .moveInRight-leave-active {
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
-.moveInRight-enter,
-.moveInRight-leave-to{
+.moveInRight-enter-from,
+.moveInRight-leave-to {
   transform: translate3d(100%, 0, 0);
 }
 
 .vFadeIn-enter-active,
 .vFadeIn-leave-active {
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 
-.vFadeIn-enter,
+.vFadeIn-enter-from,
 .vFadeIn-leave-to {
   opacity: 0;
 }
 
 .vFadeInDown-enter-active,
 .vFadeInDown-leave-active {
-  transition: transform .3s ease, opacity .3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
-.vFadeInDown-enter,
+.vFadeInDown-enter-from,
 .vFadeInDown-leave-to {
   opacity: 0;
   transform: translateY(-200px);
 }
 
-.va-collapse-transition {
-  transition: height .2s ease-in-out;
-}
-
 .vZoomIn-enter-active,
 .vZoomIn-leave-active {
-  transition: transform .3s ease, opacity .3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
-.vZoomIn-enter,
+.vZoomIn-enter-from,
 .vZoomIn-leave-to {
   transform: scale(0.7);
   opacity: 0;
+}
+
+.collapse-enter-active {
+  transition: height 0.2s 0.02s ease-in-out;
+}
+
+.collapse-leave-active {
+  transition: height 0.1s ease-in-out;
 }

@@ -27,13 +27,12 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
+    // const prefixCls = 'va-colors';
 
-    const prefixCls = 'va-colors';
-
-    export default {
-        name: 'va-colors',
-    }
+    // export default {
+    //     name: 'va-colors',
+    // }
 </script>
 
 <style scoped lang="less">

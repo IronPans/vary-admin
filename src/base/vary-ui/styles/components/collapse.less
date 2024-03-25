@@ -2,17 +2,22 @@
   .va-collapse-item {
     position: relative;
     background: #fff;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    box-shadow:
+      0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+      0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+      0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 
     &:not(:first-child):before {
       top: -1px;
       left: 0;
       right: 0;
       height: 1px;
-      content: "";
+      content: '';
       opacity: 1;
       position: absolute;
-      transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      transition:
+        opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       background-color: rgba(0, 0, 0, 0.12);
     }
 
@@ -26,7 +31,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       cursor: pointer;
-      transition: all .2s ease-in-out;
+      transition: all 0.2s ease-in-out;
 
       > i {
         vertical-align: middle;
@@ -36,7 +41,7 @@
       }
 
       &:after {
-        content: "expand_more";
+        content: 'expand_more';
         position: absolute;
         top: 50%;
         right: 12px;
@@ -44,16 +49,16 @@
         font-family: 'Material Icons';
         font-size: 20px;
         transform: translate3d(0, -50%, 0);
-        transition: transform .2s ease-in-out;
+        transition: transform 0.2s ease-in-out;
       }
     }
 
     .va-collapse-item-wrapper {
       padding: 10px;
+      background: rgba(0, 0, 0, 0.1);
     }
 
     &.va-collapse-item-active {
-
       > .va-collapse-item-header {
         &:after {
           transform: translate3d(0, -50%, 0) rotate(180deg);

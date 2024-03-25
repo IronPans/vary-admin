@@ -227,12 +227,12 @@
     </div>
 </template>
 
-<script>
-    const prefixCls = 'va-generic-classes';
+<script setup lang="ts">
+    // const prefixCls = 'va-generic-classes';
 
-    export default {
-        name: 'va-generic-classes'
-    }
+    // export default {
+    //     name: 'va-generic-classes'
+    // }
 </script>
 
 <style scoped lang="less">

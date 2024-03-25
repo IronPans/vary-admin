@@ -1,149 +1,180 @@
 <template>
-    <div :class="prefixCls">
-        <va-input :id="id" v-model="inputValue" @input="handleChange" :placeholder="placeholder"
-                 @on-focus="handleFocus" @on-blur="handleBlur"></va-input>
-        <transition name="scaleInTop">
-            <div v-if="visible" :class="menuClasses" :style="menuStyles">
-                <va-list>
-                    <va-list-item v-for="(item, index) in filterValue" :key="item"
-                                 @click.native="handleItemClick(item)">
-                        <va-list-item-text>{{item.label}}</va-list-item-text>
-                    </va-list-item>
-                    <va-list-item v-if="filterValue && filterValue.length <= 0">
-                        {{emptyMessage}}
-                    </va-list-item>
-                </va-list>
-            </div>
-        </transition>
-    </div>
+  <div :class="prefixCls">
+    <va-input
+      :id="id"
+      v-model="inputValue"
+      @on-change="handleChange"
+      :placeholder="placeholder"
+      @on-focus="handleFocus"
+      @on-blur="handleBlur"
+    ></va-input>
+    <transition name="scaleInTop">
+      <div v-if="visible" :class="menuClasses" :style="menuStyles">
+        <va-list :items="filterValue">
+          <template #item="{ menu }">
+            <va-list-item-text @click.native="handleItemClick(menu)">{{
+              menu.label
+            }}</va-list-item-text>
+          </template>
+        </va-list>
+        <div :class="prefixCls + '-empty'" v-if="filterValue && filterValue.length <= 0">
+          {{ emptyMessage }}
+        </div>
+      </div>
+    </transition>
+  </div>
 </template>
 
-<script>
-    import {getSize} from '../base/utils';
-    import {clickOutside} from '../base/dom';
-    import {listen} from '../base/event';
+<script lang="ts">
+import { onMounted, onUnmounted, defineComponent, computed, ref, watch } from "vue";
+import { getSize } from "../base/utils";
+import { clickOutside } from "../base/dom";
+import { listen } from "../base/event";
+import vaList, { vaListItemText } from "../list";
 
-    const prefixCls = 'va-autocomplete';
+const prefixCls = "va-autocomplete";
 
-    export default {
-        name: 'va-autocomplete',
-        props: {
-            count: {
-                type: Number,
-                count: 5
-            },
-            data: {
-                type: Array,
-                default() {
-                    return []
-                }
-            },
-            maxHeight: {
-                type: [Number, String]
-            },
-            emptyMessage: {
-                type: String,
-                default: '没有数据'
-            },
-            placeholder: {
-                type: String
-            },
-            id: {
-                type: String
-            }
-        },
-        data() {
-            return {
-                prefixCls,
-                visible: false,
-                filterData: this.data,
-                inputValue: '',
-                selfClick: false,
-                documentClickListener: ''
-            }
-        },
-        computed: {
-            menuClasses() {
-                return [
-                    `${prefixCls}-menus`,
-                    {
-                        [`${prefixCls}-scroll`]: this.maxHeight
-                    }
-                ]
-            },
-            menuStyles() {
-                return {
-                    maxHeight: getSize(this.maxHeight)
-                }
-            },
-            filterValue() {
-                let count = 0;
-                const {count: countProps} = this;
-                const total = this.filterData.length;
-                return this.filterData.filter((value) => {
-                    const keep =
-                        (!this.inputValue || value.label.toLowerCase().includes(this.inputValue.toLowerCase())) &&
-                        count < ((countProps && countProps !== -1) || (countProps === -1 && total) || 5);
+export default defineComponent({
+  name: "va-autocomplete",
+  components: {
+    vaList,
+    vaListItemText,
+  },
+  props: {
+    count: {
+      type: Number,
+      count: 5,
+    },
+    data: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+    maxHeight: {
+      type: [Number, String],
+    },
+    emptyMessage: {
+      type: String,
+      default: "没有数据",
+    },
+    placeholder: {
+      type: String,
+    },
+    id: {
+      type: String,
+    },
+  },
+  emits: ["on-change", "on-focus", "on-blur", "on-select"],
+  setup(props, { emit }) {
+    const filterData = ref(props.data || []);
+    let documentClickListener: any;
+    let selfClick = false;
+    const visible = ref(false);
+    const inputValue = ref("");
 
-                    if (keep) {
-                        count += 1;
-                    }
-                    return keep;
-                });
-            }
-        },
-        methods: {
-            handleDomClick(event) {
-                if (this.visible) {
-                    clickOutside(event.target, prefixCls, () => {
-                        this.selfClick = true;
-                    }, () => {
-                        this.selfClick = false;
-                        this.visible = false;
-                    });
-                }
-            },
-
-            handleChange() {
-                this.visible = true;
-                this.$emit('on-change', this.inputValue);
-            },
-
-            handleFocus() {
-                if (this.inputValue) {
-                    this.visible = true;
-                }
-                this.$emit('on-focus');
-            },
-
-            handleBlur(event) {
-                this.$emit('on-blur', event.value);
-            },
-
-            handleItemClick(item) {
-                this.visible = false;
-                this.inputValue = item.label;
-                this.$emit('on-select', {
-                    item,
-                    originEvent: event
-                });
-            }
-        },
-        watch: {
-            data(val) {
-                if (val) {
-                    this.filterData = val;
-                }
-            }
-        },
-        mounted() {
-            this.documentClickListener = listen(document, 'click', this.handleDomClick);
-        },
-        beforeDestroy() {
-            if (this.documentClickListener) {
-                this.documentClickListener();
-                this.documentClickListener = null;
-            }
-        }
+    function handleDomClick(event) {
+      if (visible.value) {
+        clickOutside(
+          event.target,
+          prefixCls,
+          () => {
+            selfClick = true;
+          },
+          () => {
+            selfClick = false;
+            visible.value = false;
+          }
+        );
+      }
     }
+
+    function handleChange() {
+      visible.value = true;
+      console.log(inputValue.value);
+      emit("on-change", inputValue.value);
+    }
+
+    function handleFocus() {
+      if (inputValue.value) {
+        visible.value = true;
+      }
+      emit("on-focus");
+    }
+
+    function handleBlur(event) {
+      emit("on-blur", event.value);
+    }
+
+    function handleItemClick(item) {
+      visible.value = false;
+      inputValue.value = item.label;
+      emit("on-select", {
+        item,
+        originEvent: event,
+      });
+    }
+
+    onMounted(() => {
+      documentClickListener = listen(document, "click", handleDomClick);
+    });
+
+    onUnmounted(() => {
+      if (documentClickListener) {
+        documentClickListener();
+        documentClickListener = null;
+      }
+    });
+
+    watch(
+      () => props.data,
+      (val) => {
+        if (val) {
+          filterData.value = val;
+        }
+      }
+    );
+
+    return {
+      prefixCls,
+      visible,
+      filterData,
+      inputValue,
+      handleBlur,
+      handleItemClick,
+      handleFocus,
+      handleChange,
+      menuClasses: computed(() => {
+        return [
+          `${prefixCls}-menus`,
+          {
+            [`${prefixCls}-scroll`]: props.maxHeight,
+          },
+        ];
+      }),
+      menuStyles: computed(() => {
+        return {
+          maxHeight: getSize(props.maxHeight),
+        };
+      }),
+      filterValue: computed(() => {
+        let count = 0;
+        const { count: countProps = 0 } = props;
+        const total = filterData.value.length;
+        return filterData.value.filter((value: any) => {
+          const keep =
+            (!inputValue.value ||
+              value.label.toLowerCase().includes(inputValue.value.toLowerCase())) &&
+            count <
+              ((countProps && countProps !== -1) || (countProps === -1 && total) || 5);
+
+          if (keep) {
+            count += 1;
+          }
+          return keep;
+        });
+      }),
+    };
+  },
+});
 </script>

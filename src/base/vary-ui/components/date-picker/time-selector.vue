@@ -1,89 +1,100 @@
 <template>
-    <div :class="prefixCls" @click="onSelector">
-        <span class="va-icon" @click="count(1)">keyboard_arrow_up</span>
-        <span :class="`${prefixCls}-wrapper`">{{getFormatValue(currentValue)}}</span>
-        <span class="va-icon" @click="count(-1)">keyboard_arrow_down</span>
-    </div>
+  <div :class="prefixCls" @click="onSelector">
+    <span class="va-icon" @click="count(1)">keyboard_arrow_up</span>
+    <span :class="`${prefixCls}-wrapper`">{{ getFormatValue(currentValue) }}</span>
+    <span class="va-icon" @click="count(-1)">keyboard_arrow_down</span>
+  </div>
 </template>
 
-<script>
-    const prefixCls = 'va-time-selector';
+<script lang="ts">
+import { defineComponent, onMounted, watch, ref, inject } from "vue";
+import { pickerInjectKey } from "./config";
 
-    export default {
-        name: 'va-time-selector',
-        props: {
-            min: {
-                type: Number
-            },
-            max: {
-                type: Number
-            },
-            type: {
-                type: String
-            },
-            value: {
-                type: [String, Number]
-            }
-        },
-        data() {
-            return {
-                prefixCls,
-                currentValue: this.value
-            }
-        },
-        methods: {
-            count(add) {
-                this.currentValue += add;
-                if (this.currentValue < this.min) {
-                    this.currentValue = this.max;
-                }
-                if (this.currentValue > this.max) {
-                    this.currentValue = this.min;
-                }
-                this.$emit('input', this.currentValue);
-                this.$emit('on-change', {
-                    type: this.type,
-                    value: this.currentValue
-                })
-            },
+const prefixCls = "va-time-selector";
 
-            setCurrentValue() {
-                const date = new Date();
-                const picker = this.$parent;
-                switch (this.type) {
-                    case 'h':
-                        picker.currentHour = this.currentValue = date.getHours();
-                        break;
-                    case 'm':
-                        picker.currentMinute = this.currentValue = date.getMinutes();
-                        break;
-                    case 's':
-                        picker.currentSecond = this.currentValue = date.getSeconds();
-                }
-            },
+export default defineComponent({
+  name: "va-time-selector",
+  props: {
+    min: {
+      type: Number,
+    },
+    max: {
+      type: Number,
+    },
+    type: {
+      type: String,
+    },
+    modelValue: {
+      type: [String, Number],
+    },
+  },
+  emits: ["update:modelValue", "on-change"],
+  setup(props, { emit }) {
+    const currentValue = ref("");
 
-            getFormatValue(value) {
-                if (value < 10) {
-                    return '0' + value;
-                }
-                return value;
-            },
-
-            onSelector(event) {
-                event.stopPropagation();
-            }
-        },
-        watch: {
-            value(val) {
-                if (typeof val !== 'undefined') {
-                    this.currentValue = val;
-                } else {
-                    this.setCurrentValue();
-                }
-            }
-        },
-        mounted() {
-            this.setCurrentValue();
-        }
+    function count(add) {
+      currentValue.value += add;
+      if (currentValue.value < props.min) {
+        currentValue.value = props.max;
+      }
+      if (currentValue.value > props.max) {
+        currentValue.value = props.min;
+      }
+      emit("update:modelValue", currentValue.value);
+      emit("on-change", {
+        type: props.type,
+        value: currentValue.value,
+      });
     }
+
+    const setValue = inject(pickerInjectKey);
+
+    function setCurrentValue() {
+      const date = new Date();
+      const picker = {};
+      switch (props.type) {
+        case "h":
+          picker.currentHour = currentValue.value = date.getHours();
+          break;
+        case "m":
+          picker.currentMinute = currentValue.value = date.getMinutes();
+          break;
+        case "s":
+          picker.currentSecond = currentValue.value = date.getSeconds();
+      }
+      setValue?.(picker);
+    }
+
+    function getFormatValue(value) {
+      if (value < 10) {
+        return "0" + value;
+      }
+      return value;
+    }
+
+    function onSelector(event) {
+      event.stopPropagation();
+    }
+
+    watch(props.modelValue, (val) => {
+      if (typeof val !== "undefined") {
+        currentValue.value = val;
+      } else {
+        setCurrentValue?.();
+      }
+    });
+
+    onMounted(() => {
+      setCurrentValue?.();
+    });
+
+    return {
+      prefixCls,
+      currentValue,
+      count,
+      getFormatValue,
+      onSelector,
+    };
+  },
+});
 </script>

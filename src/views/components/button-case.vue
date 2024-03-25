@@ -83,11 +83,11 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 
-    const prefixCls = 'va-button-case';
+    // const prefixCls = 'va-button-case';
 
-    export default {
-        name: 'va-button-case'
-    }
+    // export default {
+    //     name: 'va-button-case'
+    // }
 </script>

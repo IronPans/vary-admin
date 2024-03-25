@@ -10,10 +10,11 @@
     </div>
 </template>
 
-<script>
-    const prefixCls = 'va-editor-case';
+<script setup lang="ts">
+// import { ref } from "vue";
+//     const prefixCls = 'va-editor-case';
 
-    export default {
-        name: 'va-editor-case'
-    }
+//     export default {
+//         name: 'va-editor-case'
+//     }
 </script>

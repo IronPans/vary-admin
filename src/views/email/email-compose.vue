@@ -93,13 +93,13 @@
     </div>
 </template>
 
-<script>
-    export default {
-        name: "va-email-compose",
-        data() {
-            return {}
-        }
-    }
+<script setup lang="ts">
+    // export default {
+    //     name: "va-email-compose",
+    //     data() {
+    //         return {}
+    //     }
+    // }
 </script>
 
 <style lang="less">
